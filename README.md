@@ -1,6 +1,6 @@
-# physcomp-example-site-html
+# Physical Computing Course Documentation
 
-A simple example documentation website for the Physical Computing course. Just simple HTML. Test
+Documentation website for the Physical Computing course (autumn 2022) of the New Media major at Aalto University.
 
 ## Setup
 
