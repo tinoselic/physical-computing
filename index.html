@@ -57,11 +57,80 @@
         <br />
         <br />
         I uploaded the first version of my code onto the Arduino but unfortunately nothing happened. I couldn’t fin the
-        mistakes by myself, so I asked help from my fellow student <a href="https://troublebydesign.com/">Aditya</a>. With his help
+        mistakes by myself, so I asked help from my fellow student <a href="https://troublebydesign.com/">Aditya</a>.
+        With his help
         I made changes of the order of things to happen in my Arduino code. Another try, another failure. Aditya then
         took a close look at my circuit and found that the idle switch was not properly connected. The red wire was
         supposed to be connected to the 5V power source coming from the Arduino, but instead I accidentally connected it
         to ground where I already had a connection – ergo: no current flow. After I fixed that, everything worked fine.
+        <br />
+        <br />
+        Arduino Code
+        <pre>
+          <code>
+// For handling software debouncing of mechanical switch contacts
+#include Bounce2.h
+
+// Pins
+int idlePin = 2;  // Handset
+int dialPin = 9;  // Rotary-dial
+
+// States
+int state = 0;
+
+// How many pulses have been detected for the dialled digit
+int pulseCount = 0;
+
+// Bounce objects
+Bounce idleSwitch = Bounce();
+Bounce dialSwitch = Bounce();
+
+void setup() {
+  // Open the serial port
+  Serial.begin(9600);
+  // Declare pin inputs and attach debounce ojects
+  pinMode(idlePin, INPUT);
+  idleSwitch.attach(idlePin);
+  idleSwitch.interval(5);
+  pinMode(dialPin, INPUT);
+  dialSwitch.attach(dialPin);
+  dialSwitch.interval(5);
+}
+
+void loop() {
+  // Read the current state of all switches
+  idleSwitch.update();
+  dialSwitch.update();
+
+  switch (state) {
+    // Idle
+    case 0:
+      if (idleSwitch.rose()) {
+        state = 1;
+      }
+      break;
+
+    // Dial
+    case 1:
+      if (dialSwitch.rose()) {
+        pulseCount++;
+        // The digit 0 has 10 pulses
+        if (pulseCount == 10) {
+          pulseCount = 0;
+        }
+      }
+      break;
+  }
+
+  // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
+  if (idleSwitch.fell()) {
+    Serial.println(pulseCount);
+    state = 0;
+    pulseCount = 0;
+  }
+}
+</code>
+</pre>
       </div>
       <div class="image-container">
         <img class="image-style" src="images/20221118_150626.jpg" alt="Arduino setup" />
@@ -191,8 +260,8 @@
         <br />
         <br />
         Arduino Code
-        <code>
-          <pre>
+        <pre>
+          <code>
 // A button that first turns on one LED, then another, and then turns both LEDs off again
 int btnPin = 2;
 int ledPin1 = 9;
@@ -261,8 +330,8 @@ void loop() {
     prevBtnState = btnState;
   }
 }
-          </pre>
-        </code>
+          </code>
+        </pre>
       </div>
       <div class="image-container">
         <img class="image-style" src="images/Arduino_Basics_1.jpg" alt="Arduino_Basics_1" />
