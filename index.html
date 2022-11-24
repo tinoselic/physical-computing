@@ -43,42 +43,30 @@
         chose Arduino pin 9 to read its signal.
         <br />
         <br />
-        Like many other people, I find it difficult to get up early in the morning. Especially during autumn and winter
-        here in Finland the days get really short and the mornings are dark. For this reason, I am using a light alarm
-        clock (also called “wake-up light”) that makes it easier to wake up and get out of bed during dark times.
-        Ideally, I manage to transform the telephone not only into an alarm clock but also into a light alarm clock.
+        <a href="https://www.youtube.com/watch?v=cZ2rHqBXO1s&ab_channel=PlayfulTechnology">This video</a>
+        helped me a lot to understand the mechanism in detail and how to set up the
+        code.
         <br />
         <br />
-        Must have:
-        <br />
-        The telephone must have a display that shows the time of clock and alarm. It must also have buttons for
-        navigating (“Select” to switch between options and “Enter” to confirm the selection). The rotary dial must be
-        used to set up the time of the clock and the alarm, and the original ringing sound of the telephone must be the
-        alarm sound. Furthermore, picking up the phone must dismiss the alarm.
-        <br />
-        <br />
-        Should have:
-        <br />
-        To turn the telephone into a wake-up light the telephone should also have a connection to a light source. 30
-        minutes before the alarm, the light should start to brighten continuously like a sunrise until it is at full
-        brightness, when the alarm goes off. A LED strip should work well for this.
+        In this process I learned how to use the bounce library that helps to prevent signal noise. The main idea of the
+        code is to swich between two states: idle and dial. Idle is the state when the handset is placed on the
+        telephone. Dial is the state when the handset is lifted and the user can dial in a number. By placing the
+        handset back on the telephone (or by simply pressing the switch) the user can confirm the last dialled number.
+        This number will be printed out in the console. I then set up a code in processing that communicates with the
+        Arduino and visualizes the dialled number as a bigger graphic.
         <br />
         <br />
-        Could have:
-        <br />
-        The telephone could have options to turn the light on and off and maybe even to adjust the brightness of the
-        light. These information could be shown on the display.
-        <br />
-        Another extention could be to replace the build-in speaker and mikrophone of the phone with two bigger / louder
-        speakers. I could then choose any audio I like to play as the alarm sound.
+        I uploaded the first version of my code onto the Arduino but unfortunately nothing happened. I couldn’t fin the
+        mistakes by myself, so I asked help from my fellow student <a href="https://troublebydesign.com/">Aditya</a>. With his help
+        I made changes of the order of things to happen in my Arduino code. Another try, another failure. Aditya then
+        took a close look at my circuit and found that the idle switch was not properly connected. The red wire was
+        supposed to be connected to the 5V power source coming from the Arduino, but instead I accidentally connected it
+        to ground where I already had a connection – ergo: no current flow. After I fixed that, everything worked fine.
       </div>
       <div class="image-container">
-        <img class="image-style"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Ericsson_Dialog_in_green.JPG/1280px-Ericsson_Dialog_in_green.JPG"
-          alt="Rotary dial - Wikipedia" />
-        <img class="image-style" src="images/20221109_105720.jpg" alt="Wake-up light" />
-        <img class="image-style" src="images/Wake-Up-Phone_Concept_Must_have.jpg" alt="Must have" />
-        <img class="image-style" src="images/20221109_105612_1.jpg" alt="Should have" />
+        <img class="image-style" src="images/20221118_150626.jpg" alt="Arduino setup" />
+        <img class="image-style" src="images/20221121_182511.jpg" alt="Circuit mistake" />
+        <img class="image-style" src="images/Communication_Homework_processing_sketch.png" alt="Processing graphics" />
       </div>
     </section>
     <section class="post">
