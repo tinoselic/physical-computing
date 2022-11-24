@@ -130,6 +130,42 @@ void loop() {
   }
 }
 </code>
+</pre><br />
+<br />
+Processing Code
+<pre>
+  <code>
+import processing.serial.*;
+
+Serial myPort;  // Create object from Serial class
+String str;      // Data received from the serial port
+
+void setup()
+{
+  size(500, 500);
+  // Open whatever port is the one you're using.
+  // Change the 0 in  Serial.list()[0] to the correct device
+  printArray(Serial.list());
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600);
+}
+
+void draw()
+{
+  if ( myPort.available() > 0) { // If data is available,
+    str = myPort.readStringUntil('\n'); // read it and store it in str
+    if (str != null) {
+      println(str);
+      myPort.clear();
+      background(0);
+      fill(255);
+      textSize(400);
+      textAlign(CENTER, CENTER);
+      text(str, width/2, height);
+    }
+  }
+}
+</code>
 </pre>
       </div>
       <div class="image-container">
