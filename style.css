@@ -56,6 +56,7 @@ body {
   line-height: 1;
 }
 .text-container {
+  max-width: 75%;
   grid-column: 1 / span 1;
   font-family: "Jost Light";
   font-size: large;
@@ -64,6 +65,10 @@ body {
 .code-title {
   font-family: "Jost SemiBold";
   font-size: large;
+}
+.code-content {
+  max-width: 75%;
+  grid-column: 1 / span 1;
 }
 
 .image-container {
