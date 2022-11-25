@@ -30,7 +30,7 @@ body {
 
 ul {
   font-family: "Jost Light";
-  font-size: x-large;
+  font-size: large;
   line-height: 2;
   list-style-type: none;
   padding-left: 0%;
@@ -59,6 +59,7 @@ ul {
   font-family: "Jost SemiBold";
   font-size: x-large;
   line-height: 1;
+  margin-bottom: 5px;
 }
 
 .text-container {
