@@ -12,7 +12,7 @@ body {
 }
 
 .header {
-  margin: 100px 10vw 50px 10vw;
+  margin: 50px 10vw 50px 10vw;
 }
 
 .content {
@@ -26,33 +26,47 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+ul {
+  font-family: "Jost Light";
+  font-size: x-large;
+  line-height: 2;
+  list-style-type: none;
+  padding-left: 0%;
+}
+
 .about {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 25px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
+
 .about-text {
   max-width: 100%;
   font-family: "Jost Light";
   font-size: x-large;
   line-height: 1.5;
 }
+
 .content-name {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 25px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
+
 .post {
   column-gap: 25px;
   margin-bottom: 50px;
 }
+
 .post-title {
   font-family: "Jost SemiBold";
   font-size: x-large;
   line-height: 1;
 }
+
 .text-container {
   max-width: 100%;
   grid-column: 1 / span 1;
@@ -60,10 +74,12 @@ body {
   font-size: large;
   line-height: 1.5;
 }
+
 .code-title {
   font-family: "Jost SemiBold";
   font-size: large;
 }
+
 .code-content {
   max-width: 25%;
 }
