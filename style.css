@@ -1,16 +1,7 @@
 @font-face {
   font-family: "Jost Light";
   src: url("assets/Jost-Light.ttf");
-  font-family: "Jost Light Italic";
-  src: url("assets/Jost-LightItalic.ttf");
-  font-family: "Jost Regular";
-  src: url("assets/Jost-Regular.ttf");
-  font-family: "Jost Italic";
-  src: url("assets/Jost-Italic.ttf");
-  font-family: "Jost Bold";
-  src: url("assets/Jost-Bold.ttf");
-  font-family: "Jost Bold Italic";
-  src: url("assets/Jost-BoldItalic.ttf");
+  
 }
 
 body {
