@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: "Jost SemiBold", sans-serif;
+  font-family: "Jost Light", "Jost SemiBold", sans-serif;
 }
 
 .header {
@@ -18,22 +18,26 @@ body {
   margin: 0px 10vw;
 }
 
-.degree-name {
+.course-name {
+  font-family: "Jost SemiBold";
   font-size: x-large;
   line-height: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.student-name {
+.about {
+  font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
-.student-bio {
+.about-text {
   max-width: 50%;
+  font-family: "Jost Light";
   font-size: large;
   line-height: 1.5;
 }
-.course-name {
+.content-name {
   margin-top: 100px;
+  font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
 .post {
@@ -42,15 +46,20 @@ body {
   column-gap: 25px;
   margin-bottom: 50px;
 }
-.post-title-date {
-  margin-bottom: 25px;
+.post-title {
+  font-family: "Jost SemiBold";
   font-size: x-large;
   line-height: 1;
 }
 .text-container {
   grid-column: 1 / span 1;
+  font-family: "Jost Light";
   font-size: large;
   line-height: 1.5;
+}
+.code-title {
+  font-family: "Jost SemiBold";
+  font-size: large;
 }
 
 .image-container {

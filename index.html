@@ -12,12 +12,12 @@
 
 <body>
   <section class="header">
-    <div class="degree-name">
+    <div class="course-name">
       <div>Physical Computing</div>
       <div style="justify-self: end">Autumn 2022</div>
     </div>
-    <div class="student-name">About</div>
-    <div class="student-bio">
+    <div class="about">About</div>
+    <div class="about-text">
       Hallo! My name is Tino Selic and I am studying New Media (MA) student at Aalto University.
       Feel free to check out my <a href="https://tinoselic.myportfolio.com/">Portfolio</a>. :)
       <br />
@@ -27,11 +27,12 @@
     </div>
   </section>
   <section class="content">
-    <div class="course-name">Course Documentation</div>
+    <div class="content-name">Course Documentation</div>
     <section class="post">
-      <div class="post-title-date">04 Communication</div>
+      <div class="post-title">04 Communication</div>
       <div class="text-container">
-        21.11.22
+        Posted 21.11.22
+        <br />
         <br />
         I chose to work with the rotary dial mechanism and the idle switch of Matti’s red example telephone, because it
         is relevant for my final project. The idle switch is triggered when the handset is lifted or placed back on the
@@ -65,7 +66,7 @@
         to ground where I already had a connection – ergo: no current flow. After I fixed that, everything worked fine.
         <br />
         <br />
-        Arduino Code
+        <div class="code-title">Arduino Code</div>
         <pre>
           <code>
 // For handling software debouncing of mechanical switch contacts
@@ -130,10 +131,9 @@ void loop() {
   }
 }
 </code>
-</pre><br />
-<br />
-Processing Code
-<pre>
+</pre>
+        <div class="code-title">Processing Code</div>
+        <pre>
   <code>
 import processing.serial.*;
 
@@ -175,9 +175,10 @@ void draw()
       </div>
     </section>
     <section class="post">
-      <div class="post-title-date">03 Making Things Move</div>
+      <div class="post-title">03 Making Things Move</div>
       <div class="text-container">
-        13.11.22
+        Posted 13.11.22
+        <br />
         <br />
         I came up with the idea for my project, when Matti introduced the rotary dial mechanisms of old telephones and
         how they can be used as potential inputs. I want to turn an old rotary dial telephone into an alarm clock and
@@ -191,7 +192,7 @@ void draw()
         Ideally, I manage to transform the telephone not only into an alarm clock but also into a light alarm clock.
         <br />
         <br />
-        Must have:
+        <font face="Jost SemiBold">Must have</font>
         <br />
         The telephone must have a display that shows the time of clock and alarm. It must also have buttons for
         navigating (“Select” to switch between options and “Enter” to confirm the selection). The rotary dial must be
@@ -199,14 +200,14 @@ void draw()
         alarm sound. Furthermore, picking up the phone must dismiss the alarm.
         <br />
         <br />
-        Should have:
+        <font face="Jost SemiBold">Should have</font>
         <br />
         To turn the telephone into a wake-up light the telephone should also have a connection to a light source. 30
         minutes before the alarm, the light should start to brighten continuously like a sunrise until it is at full
         brightness, when the alarm goes off. A LED strip should work well for this.
         <br />
         <br />
-        Could have:
+        <font face="Jost SemiBold">Could have</font>
         <br />
         The telephone could have options to turn the light on and off and maybe even to adjust the brightness of the
         light. These information could be shown on the display.
@@ -225,14 +226,15 @@ void draw()
       </div>
     </section>
     <section class="post">
-      <div class="post-title-date">02 Sensing the World</div>
+      <div class="post-title">02 Sensing the World</div>
       <div class="text-container">
-        07.11.22
+        Posted 07.11.22
+        <br />
         <br />
         “FLUX is an alt.arcade reaction game, where players compete against one another to hit 5 buttons in the right
         order as quickly as possible.”
         <br />
-        <a href="https://www.wethrowswitches.com/flux">wethrowswitches.com/flux</a>
+        <a href="https://www.wethrowswitches.com/flux">https://www.wethrowswitches.com/flux</a>
         <br />
         <br />
         This project caught my attention because it seems simple but fun and it looks cool. Judging by the pictures this
@@ -270,10 +272,11 @@ void draw()
       </div>
     </section>
     <section class="post">
-      <div class="post-title-date">01 Introduction: Arduino Basics
+      <div class="post-title">01 Introduction: Arduino Basics
       </div>
       <div class="text-container">
-        25.10.22
+        Posted 25.10.22
+        <br />
         <br />
         With the knowledge I remembered from class, high school physics class and my first (unsuccessful) studies in
         electrical engineering, I started to draw a first circuit diagram. I then collected the parts I needed and built
@@ -296,7 +299,7 @@ void draw()
         understanding how to save the button state as pressed and released.
         <br />
         <br />
-        Arduino Code
+        <div class="code-title">Arduino Code</div>
         <pre>
           <code>
 // A button that first turns on one LED, then another, and then turns both LEDs off again
