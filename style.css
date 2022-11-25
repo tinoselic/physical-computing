@@ -35,15 +35,8 @@ ul {
   padding-left: 0%;
 }
 
-.about-text {
-  max-width: 100%;
-  font-family: "Jost Light";
-  font-size: large;
-  line-height: 1.5;
-}
-
 .content-name {
-  margin-top: 100px;
+  margin-top: 75px;
   margin-bottom: 25px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
