@@ -27,19 +27,19 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 .about {
-  margin-top: 50px;
+  margin-top: 100px;
   margin-bottom: 10px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
 .about-text {
-  max-width: 50%;
-  font-family: "Jost Light";
-  font-size: large;
+  max-width: 75%;
+  font-family: "Jost SemiBold";
+  font-size: x-large;
   line-height: 1.5;
 }
 .content-name {
-  margin-top: 50px;
+  margin-top: 100px;
   margin-bottom: 10px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
