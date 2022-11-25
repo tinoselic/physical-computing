@@ -40,12 +40,13 @@ ul {
   margin-bottom: 25px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
+  line-height: 1;
 }
 
 .about-text {
   max-width: 100%;
   font-family: "Jost Light";
-  font-size: x-large;
+  font-size: large;
   line-height: 1.5;
 }
 
@@ -54,6 +55,13 @@ ul {
   margin-bottom: 25px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
+  line-height: 1;
+}
+
+.introduction {
+  font-family: "Jost SemiBold";
+  font-size: x-large;
+  margin-bottom: 50px;
 }
 
 .post {

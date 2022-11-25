@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/dial_favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Physical Computing Tino Selic</title>
+</head>
+
+<body>
+  <section class="header">
+    <div class="course-name">
+      <div>Physical Computing</div>
+      <div style="justify-self: end">Autumn 2022</div>
+    </div>
+    <nav>
+      <div class="menu">
+        <ul>
+          <li><a href="index.html" class="type-content">Home</a></li>
+          <li><a href="about.html" class="type-content">About</a></li>
+          <li><a href="code.html" class="type-content">Code</a></li>
+        </ul>
+      </div>
+    </nav>
+  </section>
+  <section class="content">
+    <div class="content-name">Code</div>
+    <div class="introduction">
+        Here you can find all the code from my exercises and the final project.
+    </div>
+    <section class="post">
+      <div class="post-title">04 Communication</div>
+      <div class="text-container">
+        Posted 21.11.22
+        <br />
+        <br />
+        <div class="code-title">Arduino Code</div>
+        <div class="code-content">
+          <pre>
+          <code>
+// For handling software debouncing of mechanical switch contacts
+#include &lt;Bounce2.h&gt;
+
+// Pins
+int idlePin = 2;  // Handset
+int dialPin = 9;  // Rotary-dial
+
+// States
+int state = 0;
+
+// How many pulses have been detected for the dialled digit
+int pulseCount = 0;
+
+// Bounce objects
+Bounce idleSwitch = Bounce();
+Bounce dialSwitch = Bounce();
+
+void setup() {
+  // Open the serial port
+  Serial.begin(9600);
+  // Declare pin inputs and attach debounce ojects
+  pinMode(idlePin, INPUT);
+  idleSwitch.attach(idlePin);
+  idleSwitch.interval(5);
+  pinMode(dialPin, INPUT);
+  dialSwitch.attach(dialPin);
+  dialSwitch.interval(5);
+}
+
+void loop() {
+  // Read the current state of all switches
+  idleSwitch.update();
+  dialSwitch.update();
+
+  switch (state) {
+    // Idle
+    case 0:
+      if (idleSwitch.rose()) {
+        state = 1;
+      }
+      break;
+
+    // Dial
+    case 1:
+      if (dialSwitch.rose()) {
+        pulseCount++;
+        // The digit 0 has 10 pulses
+        if (pulseCount == 10) {
+          pulseCount = 0;
+        }
+      }
+      break;
+  }
+
+  // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
+  if (idleSwitch.fell()) {
+    Serial.println(pulseCount);
+    state = 0;
+    pulseCount = 0;
+  }
+}
+          </code>
+        </pre>
+        </div>
+        <div class="code-title">Processing Code</div>
+        <div class="code-content">
+          <pre>
+          <code>
+import processing.serial.*;
+
+Serial myPort;  // Create object from Serial class
+String str;      // Data received from the serial port
+
+void setup()
+{
+  size(500, 500);
+  // Open whatever port is the one you're using.
+  // Change the 0 in  Serial.list()[0] to the correct device
+  printArray(Serial.list());
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600);
+}
+
+void draw()
+{
+  if ( myPort.available() > 0) { // If data is available,
+    str = myPort.readStringUntil('\n'); // read it and store it in str
+    if (str != null) {
+      println(str);
+      myPort.clear();
+      background(0);
+      fill(255);
+      textSize(400);
+      textAlign(CENTER, CENTER);
+      text(str, width/2, height);
+    }
+  }
+}
+        </code>
+      </pre>
+        </div>
+      </div>
+    </section>
+    <section class="post">
+      <div class="post-title">01 Introduction: Arduino Basics
+      </div>
+      <div class="text-container">
+        Posted 25.10.22
+        <br />
+        <br />
+        <div class="code-title">Arduino Code</div>
+        <pre>
+          <code>
+// A button that first turns on one LED, then another, and then turns both LEDs off again
+int btnPin = 2;
+int ledPin1 = 9;
+int ledPin2 = 11;
+int btnState = false;
+int prevBtnState = false;
+int counter = 0;
+void setup() {
+  // Open the serial port
+  Serial.begin(9600);
+  // set the button pin to be an input
+  pinMode(btnPin, INPUT);
+  // set the LED pin to be an output
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+}
+void loop() {
+  // read the button pin
+  btnState = digitalRead(btnPin);
+  // State 0
+  if (btnState != prevBtnState && counter == 0) {
+    // button pressed down
+    if (btnState == HIGH) {
+      Serial.println("Light 1 on, Light 2 off");
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, LOW);
+    }
+    // button released
+    if (btnState == LOW) {
+      counter++;
+      Serial.print("Count: ");
+      Serial.println(counter);
+    }
+    prevBtnState = btnState;
+  }
+  // State 1
+  if (btnState != prevBtnState && counter == 1) {
+    // button pressed down
+    if (btnState == HIGH) {
+      Serial.println("Light 1 on, Light 2 on");
+      digitalWrite(ledPin1, HIGH);
+      digitalWrite(ledPin2, HIGH);
+    }
+    // button released
+    if (btnState == LOW) {
+      counter++;
+      Serial.print("Count: ");
+      Serial.println(counter);
+    }
+    prevBtnState = btnState;
+  }
+  // State 2
+  if (btnState != prevBtnState && counter == 2) {
+    // button pressed down
+    if (btnState == HIGH) {
+      Serial.println("Light 1 off, Light 2 off");
+      digitalWrite(ledPin1, LOW);
+      digitalWrite(ledPin2, LOW);
+    }
+    // button released
+    if (btnState == LOW) {
+      counter = 0;
+      Serial.print("Count: ");
+      Serial.println(counter);
+    }
+    prevBtnState = btnState;
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+  </section>
+  <footer class="footer">Thanks Calvin.</footer>
+</body>
+
+</html>
