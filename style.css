@@ -22,7 +22,7 @@ body {
 
 .course-name {
   font-family: "Sporting Regular";
-  font-size: x-large;
+  font-size: large;
   line-height: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,7 +40,7 @@ ul {
   margin-top: 75px;
   margin-bottom: 25px;
   font-family: "Sporting Regular";
-  font-size: xxx-large;
+  font-size: xx-large;
   line-height: 1;
 }
 
