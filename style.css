@@ -27,6 +27,8 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 .about {
+  margin-top: 50px;
+  margin-bottom: 10px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
@@ -37,7 +39,8 @@ body {
   line-height: 1.5;
 }
 .content-name {
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-bottom: 10px;
   font-family: "Jost SemiBold";
   font-size: xxx-large;
 }
