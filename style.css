@@ -102,10 +102,9 @@ ul {
 }
 
 .footer {
-  margin-top: 25px;
   margin-bottom: 25px;
   text-align: center;
-  font-size: x-small;
+  font-size: small;
 }
 
 @media only screen and (min-width: 768px) {

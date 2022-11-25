@@ -39,29 +39,30 @@
         <br />
         <img class="image-style" src="images/20221116_145610.jpg" alt="Metka Telephone" />
         Matti told that these kinds of old telephones can be found in thrift stores or recycling centers all over
-        Helsinki and are sold around 5-10 €. So I began my search and eventually found and bought one for 6 € at <a
-          href="https://www.kirppikset.info/kirppikset/metkan-kirpputori-helsinki">Metka
-          kirpputori</a>.
+        Helsinki and are sold around 5-10 €. So I began my search and eventually found and bought one for 6 € at 
+        <a href="https://www.kirppikset.info/kirppikset/metkan-kirpputori-helsinki">Metka kirpputori</a>.
         <br />
         <br />
         <img class="image-style" src="images/20221116_145856.jpg" alt="Case Opening 1" />
         The telephone seemed to be in good shape and I was pleased with the good deal I got. A small downside was that I
-        had
-        to clean it because it was really dirty in some places. Luckily, it was a similar model to the one Matti showed
+        had to clean it because it was really dirty in some places. Luckily, it was a similar model to the one Matti showed
         us. So I knew how to open the case by using a flat-head screwdriver to remove a screw on the backside of the
         telephone’s case.
         <br />
         <br />
         <img class="image-style" src="images/20221122_133845.jpg" alt="Case Opening 2" />
-        Text goes here.
+        Once the case was open my goal was to make space for the Arduino and other components that will be added throughout
+        the project. With the same screwdriver I then disconnected the cords of the power supply and the handset.
         <br />
         <br />
         <img class="image-style" src="images/20221122_134542.jpg" alt="Case Opening 3" />
-        Text goes here.
+        I repeated the same thing on the other side of the telephone by disconnecting all the wires of the other components 
+        (rotary dial, idle switch, bell).
         <br />
         <br />
         <img class="image-style" src="images/20221122_142328.jpg" alt="Case Opening 4" />
-        Text goes here.
+        At this point I was finally able to take a closer look at each individual part. Inside the phone was also a wiring 
+        diagram from 1967.
         <br />
         <br />
         <img class="image-style" src="images/20221122_171106.jpg" alt="Old Circuit Board" />
@@ -115,12 +116,11 @@
         <br />
         <br />
         <img class="image-style" src="images/Communication_Homework_processing_sketch.png" alt="Processing graphics" />
-        I uploaded the first version of my code onto the Arduino but unfortunately nothing happened. I couldn’t fin the
+        I uploaded the first version of my code onto the Arduino but unfortunately nothing happened. I couldn’t find the
         mistakes by myself, so I asked help from my fellow student <a href="https://troublebydesign.com/">Aditya</a>.
         With his help I made changes of the order of things to happen in my Arduino code. Another try, another failure.
         Aditya then took a close look at my circuit and found that the idle switch was not properly connected. The red
-        wire was
-        supposed to be connected to the 5V power source coming from the Arduino, but instead I accidentally connected it
+        wire was supposed to be connected to the 5V power source coming from the Arduino, but instead I accidentally connected it
         to ground where I already had a connection – ergo: no current flow. After I fixed that, everything worked fine.
       </div>
     </section>
