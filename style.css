@@ -1,20 +1,20 @@
 @font-face {
-  font-family: "Roboto Light";
-  src: url("assets/Roboto-Light.ttf");
-  font-family: "Roboto Light Italic";
-  src: url("assets/Roboto-LightItalic.ttf");
-  font-family: "Roboto Regular";
-  src: url("assets/Roboto-Regular.ttf");
-  font-family: "Roboto Italic";
-  src: url("assets/Roboto-Italic.ttf");
-  font-family: "Roboto Bold";
-  src: url("assets/Roboto-Bold.ttf");
-  font-family: "Roboto Bold Italic";
-  src: url("assets/Roboto-BoldItalic.ttf");
+  font-family: "Jost Light";
+  src: url("assets/Jost-Light.ttf");
+  font-family: "Jost Light Italic";
+  src: url("assets/Jost-LightItalic.ttf");
+  font-family: "Jost Regular";
+  src: url("assets/Jost-Regular.ttf");
+  font-family: "Jost Italic";
+  src: url("assets/Jost-Italic.ttf");
+  font-family: "Jost Bold";
+  src: url("assets/Jost-Bold.ttf");
+  font-family: "Jost Bold Italic";
+  src: url("assets/Jost-BoldItalic.ttf");
 }
 
 body {
-  font-family: "Roboto Light", sans-serif;
+  font-family: "Jost Light", sans-serif;
 }
 
 .header {
