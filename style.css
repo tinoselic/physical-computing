@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "Monument";
-  src: url("assets/MonumentGrotesk-Regular.ttf");
+  font-family: "Roboto Regular";
+  src: url("assets/Roboto-Regular.ttf");
 }
 
 body {
-  font-family: "Monument", sans-serif;
+  font-family: "Roboto Regular", sans-serif;
 }
 
 .header {
