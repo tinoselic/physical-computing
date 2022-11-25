@@ -1,11 +1,13 @@
 @font-face {
   font-family: "Jost Light";
   src: url("assets/Jost-Light.ttf");
+  font-family: "Jost SemiBold";
+  src: url("assets/Jost-SemiBold.ttf");
   
 }
 
 body {
-  font-family: "Jost Light", sans-serif;
+  font-family: "Jost SemiBold", sans-serif;
 }
 
 .header {
