@@ -1,14 +1,10 @@
 @font-face {
-  font-family: "Jost Light";
-  src: url("assets/Jost-Light.ttf");
-  font-family: "Jost SemiBold";
-  src: url("assets/Jost-SemiBold.ttf");
-  font-family: "Sporting Regular";
-  src: url("assets/SportingGrotesque-Regular.otf");
+  font-family: "Jost Regular";
+  src: url("assets/Jost-Regular.ttf");
 }
 
 body {
-  font-family: "Jost Light", "Jost SemiBold", "Sporting Regular",  sans-serif;
+  font-family: "Jost Regular",  sans-serif;
   background-color: antiquewhite;
 }
 
