@@ -17,7 +17,6 @@ body {
 }
 
 .course-name {
-  font-family: "Sporting Regular";
   font-size: large;
   line-height: 1;
   display: grid;
@@ -25,7 +24,6 @@ body {
 }
 
 ul {
-  font-family: "Jost Light";
   font-size: large;
   line-height: 2;
   list-style-type: none;
@@ -35,13 +33,11 @@ ul {
 .content-name {
   margin-top: 75px;
   margin-bottom: 25px;
-  font-family: "Sporting Regular";
   font-size: xx-large;
   line-height: 1;
 }
 
 .introduction {
-  font-family: "Jost Light";
   font-size: x-large;
   margin-bottom: 50px;
 }
@@ -52,7 +48,6 @@ ul {
 }
 
 .post-title {
-  font-family: "Jost SemiBold";
   font-size: x-large;
   line-height: 1;
   margin-bottom: 5px;
@@ -61,13 +56,11 @@ ul {
 .text-container {
   max-width: 100%;
   grid-column: 1 / span 1;
-  font-family: "Jost Light";
   font-size: large;
   line-height: 1.5;
 }
 
 .code-title {
-  font-family: "Jost SemiBold";
   font-size: large;
 }
 
