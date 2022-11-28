@@ -62,7 +62,6 @@ void loop() {
 
     // Dial
     case 1:
-      if (dialSwitch.rose()) {
         if (numberSwitch.rose()) {
           pulseCount++;
           // The digit 0 has 10 pulses
@@ -73,7 +72,6 @@ void loop() {
           //Serial.print("Pulse Count: ");
         }
         break;
-      }
   }
 
   // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
