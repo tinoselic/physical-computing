@@ -54,14 +54,14 @@ void loop() {
   idleSwitch.update();
   dialSwitch.update();
   numberSwitch.update();
-
+  /*
   // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
   if (idleSwitch.rose()) {
     state = 0;
     pulseCount = 0;
     Serial.println("Back to idle.");
   }
-
+  */
   switch (state) {
     // Idle
     case 0:
@@ -86,14 +86,14 @@ void loop() {
       }
       break;
 
-    // Setting the alarm
+    // Alarm Mode
     case 1:
       if (numberSwitch.rose()) {
         pulseCount++;
       }
       // Check whether the dial has returned all the way
       if (dialSwitch.rose()) {
-      Serial.println("Setting the alarm...");
+        Serial.println("Setting the alarm...");
         // The digit 0 has 10 pulses
         if (pulseCount == 10) {
           pulseCount = 0;
@@ -102,6 +102,18 @@ void loop() {
         Serial.println(digit);
         pulseCount = 0;
       }
+      // Confirm the alarm by placing the handset back on the telephone
+      if (idleSwitch.rose()) {
+        Serial.println("Alarm set.");
+        state = 10;
+      }
+      break;
+
+    // Alarm set
+    case 10:
+      delay(100);
+      Serial.println("Back to Idle.");
+      state = 0;
       break;
   }
 }
