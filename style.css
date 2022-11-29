@@ -5,15 +5,15 @@
 
 body {
   font-family: "Jost Regular",  sans-serif;
-  background-color: rgb(250, 250, 250);
+  background-color: antiquewhite;
 }
 
 .header {
-  margin: 50px 10vw 50px 10vw;
+  margin: 50px;
 }
 
 .content {
-  margin: 0px 10vw;
+  margin: 0px 50px;
 }
 
 .course-name {
@@ -94,6 +94,22 @@ ul {
   margin-bottom: 25px;
   text-align: center;
   font-size: x-small;
+}
+
+a:link {
+  color: red;
+}
+
+a:visited {
+  color: rgb(255, 200, 0);
+}
+
+a:hover {
+  color: rgb(0, 0, 200);
+}
+
+a:active {
+  color: black;
 }
 
 @media only screen and (min-width: 768px) {
