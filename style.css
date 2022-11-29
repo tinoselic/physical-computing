@@ -120,12 +120,12 @@ a:active {
 
 @media only screen and (min-width: 1280px) {
   body {
-    padding: 0 300px;
+    padding: 0 400px;
   }
 }
 
 @media only screen and (min-width: 1920px) {
   body {
-    padding: 0 500px;
+    padding: 0 600px;
   }
 }
