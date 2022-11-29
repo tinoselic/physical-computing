@@ -17,6 +17,9 @@ int state = 0;
 // How many pulses have been detected for the dialled digit
 int pulseCount = 0;
 
+// The dialled digit
+int digit = 0;
+
 // Bounce objects
 Bounce idleSwitch = Bounce();
 Bounce dialSwitch = Bounce();
@@ -28,6 +31,8 @@ Bounce numberSwitch = Bounce();
 void setup() {
   // Open the serial port
   Serial.begin(9600);
+  // Print out test
+  Serial.println("Sketch is running...");
   // Declare pin inputs and attach debounce ojects
   pinMode(idlePin, INPUT_PULLUP);
   idleSwitch.attach(idlePin);
@@ -47,9 +52,8 @@ void setup() {
 void loop() {
   // Read the current state of all switches
   idleSwitch.update();
-  numberSwitch.update();
   dialSwitch.update();
-
+  numberSwitch.update();
 
   // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
   if (idleSwitch.rose()) {
@@ -70,29 +74,33 @@ void loop() {
         if (pulseCount == 10) {
           pulseCount = 0;
         }
-      Serial.println(pulseCount);
+        digit = pulseCount;
+        Serial.println(digit);
+        pulseCount = 0;
       }
+      // Lifting the handset
       if (idleSwitch.fell()) {
         Serial.println("Handset lifted.");
-        state = pulseCount;
+        state = digit;
+        pulseCount = 0;
       }
-      //pulseCount = 0;
       break;
 
-    // Alarm
+    // Setting the alarm
     case 1:
-    Serial.println("Setting the alarm.");
       if (numberSwitch.rose()) {
         pulseCount++;
       }
       // Check whether the dial has returned all the way
       if (dialSwitch.rose()) {
+      Serial.println("Setting the alarm...");
         // The digit 0 has 10 pulses
         if (pulseCount == 10) {
           pulseCount = 0;
         }
-      Serial.println(pulseCount);
-      pulseCount = 0;
+        digit = pulseCount;
+        Serial.println(digit);
+        pulseCount = 0;
       }
       break;
   }
