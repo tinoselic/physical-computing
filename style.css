@@ -97,19 +97,19 @@ ul {
 }
 
 a:link {
-  color: red;
+  color: rgb(230, 0, 0);
 }
 
 a:visited {
-  color: rgb(255, 200, 0);
+  color: rgb(230, 0, 0);
 }
 
 a:hover {
-  color: rgb(0, 0, 200);
+  color: rgb(255, 200, 0);
 }
 
 a:active {
-  color: black;
+  color: rgb(0, 80, 220);
 }
 
 @media only screen and (min-width: 768px) {

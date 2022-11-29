@@ -8,8 +8,8 @@
 
 // Pins
 int idlePin = 2;    // Handset
-int numberPin = 9;  // Rotary-dial
 int dialPin = 10;   // Control of rotary-dial
+int numberPin = 9;  // Number dial
 
 // States
 int state = 0;
@@ -19,8 +19,8 @@ int pulseCount = 0;
 
 // Bounce objects
 Bounce idleSwitch = Bounce();
-Bounce numberSwitch = Bounce();
 Bounce dialSwitch = Bounce();
+Bounce numberSwitch = Bounce();
 
 // Ensure that the dialled time is empty
 //memset(clock, 0, MAXDIGITS);
@@ -29,57 +29,71 @@ void setup() {
   // Open the serial port
   Serial.begin(9600);
   // Declare pin inputs and attach debounce ojects
-  pinMode(idlePin, INPUT);
+  pinMode(idlePin, INPUT_PULLUP);
   idleSwitch.attach(idlePin);
   idleSwitch.interval(5);
-  pinMode(numberPin, INPUT);
-  numberSwitch.attach(numberPin);
-  numberSwitch.interval(5);
-  pinMode(dialPin, INPUT);
+
+  pinMode(dialPin, INPUT_PULLUP);
   dialSwitch.attach(dialPin);
   dialSwitch.interval(5);
+
+  pinMode(numberPin, INPUT_PULLUP);
+  numberSwitch.attach(numberPin);
+  numberSwitch.interval(5);
 
   //Serial.println("Hello");
 }
 
 void loop() {
   // Read the current state of all switches
-  //digitalRead(idlePin);
-  //digitalRead(Pin);
-  //digitalRead(dialPin);
   idleSwitch.update();
   numberSwitch.update();
   dialSwitch.update();
 
-  switch (state) {
-    // Idle
-    case 0:
-      if (idleSwitch.fell()) {
-        //Serial.println("Handset lifted.");
-        state = 1;
-      }
-      break;
-
-    // Dial
-    case 1:
-        if (numberSwitch.rose()) {
-          pulseCount++;
-          // The digit 0 has 10 pulses
-          if (pulseCount == 10) {
-            pulseCount = 0;
-          }
-
-          //Serial.print("Pulse Count: ");
-        }
-        break;
-  }
 
   // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
   if (idleSwitch.rose()) {
-    Serial.println(pulseCount);
     state = 0;
     pulseCount = 0;
-    //memset(clock, 0, MAXDIGITS);
-    //Serial.println("Back to idle.");
+    Serial.println("Back to idle.");
+  }
+
+  switch (state) {
+    // Idle
+    case 0:
+      if (numberSwitch.rose()) {
+        pulseCount++;
+      }
+      // Check whether the dial has returned all the way
+      if (dialSwitch.rose()) {
+        // The digit 0 has 10 pulses
+        if (pulseCount == 10) {
+          pulseCount = 0;
+        }
+      Serial.println(pulseCount);
+      }
+      if (idleSwitch.fell()) {
+        Serial.println("Handset lifted.");
+        state = pulseCount;
+      }
+      //pulseCount = 0;
+      break;
+
+    // Alarm
+    case 1:
+    Serial.println("Setting the alarm.");
+      if (numberSwitch.rose()) {
+        pulseCount++;
+      }
+      // Check whether the dial has returned all the way
+      if (dialSwitch.rose()) {
+        // The digit 0 has 10 pulses
+        if (pulseCount == 10) {
+          pulseCount = 0;
+        }
+      Serial.println(pulseCount);
+      pulseCount = 0;
+      }
+      break;
   }
 }
