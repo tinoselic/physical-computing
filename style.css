@@ -9,11 +9,11 @@ body {
 }
 
 .header {
-  margin: 50px;
+  margin: 50px 25px 0px;
 }
 
 .content {
-  margin: 0px 50px;
+  margin: 0px 25px;
 }
 
 .course-name {
@@ -31,7 +31,7 @@ ul {
 }
 
 .content-name {
-  margin-top: 75px;
+  margin-top: 50px;
   margin-bottom: 25px;
   font-size: xx-large;
   line-height: 1;
@@ -120,12 +120,12 @@ a:active {
 
 @media only screen and (min-width: 1280px) {
   body {
-    padding: 0 250px;
+    padding: 0 300px;
   }
 }
 
 @media only screen and (min-width: 1920px) {
   body {
-    padding: 0 350px;
+    padding: 0 500px;
   }
 }
