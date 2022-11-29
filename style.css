@@ -1,26 +1,17 @@
 @font-face {
   font-family: "Jost Regular";
   src: url("assets/Jost-Regular.ttf");
+  font-family: "Jost Bold";
+  src: url("assets/Jost-Bold.ttf");
 }
 
 body {
-  font-family: "Jost Regular",  sans-serif;
+  font-family: "Jost Regular", "Jost Bold", sans-serif;
   background-color: antiquewhite;
 }
 
 .header {
-  margin: 50px 25px 0px;
-}
-
-.content {
-  margin: 0px 25px;
-}
-
-.course-name {
-  font-size: large;
-  line-height: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  margin: 0px 25px 0px;
 }
 
 ul {
@@ -30,11 +21,22 @@ ul {
   padding-left: 0%;
 }
 
+.course-name {
+  font-size: large;
+  line-height: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .content-name {
   margin-top: 50px;
   margin-bottom: 25px;
   font-size: xx-large;
   line-height: 1;
+}
+
+.content {
+  margin: 0px 25px;
 }
 
 .introduction {
