@@ -10,11 +10,11 @@
   box-sizing: border-box;
   text-decoration: none;
   color: hsl(50, 5%, 10%);
-  font-family: "Jost Regular", sans-serif;
 }
 
 body {
-  background: hsl(45, 55%, 90%);
+  background: #f2f2f2;
+  font-family: "Jost Regular", sans-serif;
 }
 
 nav {
@@ -45,7 +45,7 @@ nav ul li a {
 
 .course-name {
   padding-top: 75px;
-  font-size: large;
+  font-size: medium;
   line-height: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -122,19 +122,31 @@ nav ul li a {
 }
 
 a:link {
-  color: hsl(355, 80%, 55%);
-}
-
-a:visited {
-  color: hsl(355, 80%, 55%);
+  color: #ff9933;
 }
 
 a:hover {
-  color: rgb(255, 200, 0);
+  color: #ffe14c;
 }
 
 a:active {
-  color: hsl(220, 80%, 55%);
+  color: #e5a1b8;
+}
+
+nav a:link {
+  color: #f2f2f2;
+}
+
+nav a:visited {
+  color: #f2f2f2;
+}
+
+nav a:hover {
+  color: #ffe14c;
+}
+
+nav a:active {
+  color: #e5a1b8;
 }
 
 @media only screen and (min-width: 768px) {
