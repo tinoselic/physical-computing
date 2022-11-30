@@ -10,6 +10,7 @@
 int idlePin = 2;    // Handset
 int dialPin = 10;   // Control of rotary-dial
 int numberPin = 9;  // Number dial
+int ringerPins[] = {3, 4};
 
 // States
 int state = 0;
@@ -19,6 +20,9 @@ int pulseCount = 0;
 
 // The dialled digit
 int digit = 0;
+
+// Time interval between ringing; ringtone
+unsigned long lastRingTime;
 
 // Bounce objects
 Bounce idleSwitch = Bounce();
@@ -112,8 +116,40 @@ void loop() {
     // Alarm set
     case 10:
       delay(1000);
-      Serial.println("Back to Idle.");
-      state = 0;
+      Serial.println("Alarm is ringing.");
+      state = 100;
+      break;
+
+      // Alarm ringing
+    case 100:
+      int now = millis();
+      if (now - lastRingTime > 4000) {
+        // Ringtone: 0.4 seconds on, 0.2 seconds off
+        for (int j = 0; j < 2; j++) {
+          for (int i = 0; i < 20; i++) {
+            // Check if the handset is lifted to end the ringing
+            idleSwitch.update();
+            if (idleSwitch.fell()) {
+              j = 2;
+              break;
+            }
+            digitalWrite(ringerPins[0], i%2);
+            digitalWrite(ringerPins[1], 1-(i%2));
+            delay(20);
+          }
+          // 0.2 seconds off
+          delay(200);
+        }
+        // Stop ringing
+        digitalWrite(ringerPins[0], LOW);
+        digitalWrite(ringerPins[1], LOW);
+        lastRingTime = now;
+      }
+      if (idleSwitch.fell()) {
+        Serial.println("Alarm ended.");
+        Serial.println("Back to idle.");
+        state = 0;
+      }
       break;
   }
 }
