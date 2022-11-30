@@ -111,7 +111,7 @@ void loop() {
 
     // Alarm set
     case 10:
-      delay(100);
+      delay(1000);
       Serial.println("Back to Idle.");
       state = 0;
       break;
