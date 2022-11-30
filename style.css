@@ -6,12 +6,13 @@
 }
 
 body {
-  font-family: "Jost Regular", "Jost Bold", sans-serif;
-  background-color: antiquewhite;
+  margin: 0px 25px 0px;
+  background-color: hsl(50, 55%, 90%);
+  color: hsl(50, 5%, 20%);
+  font-family: "Jost Regular", sans-serif;
 }
 
 .header {
-  margin: 0px 25px 0px;
 }
 
 ul {
@@ -36,7 +37,6 @@ ul {
 }
 
 .content {
-  margin: 0px 25px;
 }
 
 .introduction {
@@ -99,11 +99,11 @@ ul {
 }
 
 a:link {
-  color: rgb(230, 0, 0);
+  color: hsl(355, 80%, 55%);
 }
 
 a:visited {
-  color: rgb(230, 0, 0);
+  color: hsl(355, 80%, 55%);
 }
 
 a:hover {
@@ -111,23 +111,23 @@ a:hover {
 }
 
 a:active {
-  color: rgb(0, 80, 220);
+  color: hsl(220, 80%, 55%);
 }
 
 @media only screen and (min-width: 768px) {
   body {
-    padding: 0 150px;
+    margin: 0 150px;
   }
 }
 
 @media only screen and (min-width: 1280px) {
   body {
-    padding: 0 400px;
+    margin: 0 400px;
   }
 }
 
 @media only screen and (min-width: 1920px) {
   body {
-    padding: 0 600px;
+    margin: 0 600px;
   }
 }
