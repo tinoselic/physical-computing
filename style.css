@@ -8,12 +8,11 @@
   margin: 0;
   list-style: none;
   box-sizing: border-box;
-  text-decoration: none;
   color: hsl(50, 5%, 10%);
 }
 
 body {
-  background: #f1f1f1;
+  background: #f9f9f9;
   font-family: "Jost Regular", sans-serif;
 }
 
@@ -121,32 +120,21 @@ nav ul li a {
   font-size: x-small;
 }
 
-a:link {
-  color: #ff9933;
-}
-
-a:hover {
-  color: #ffe14c;
-}
-
-a:active {
-  color: #e5a1b8;
-}
-
 nav a:link {
-  color: #f1f1f1;
+  text-decoration: none;
+  color: #f9f9f9;
 }
 
 nav a:visited {
-  color: #f2f2f2;
+  color: #f9f9f9;
 }
 
 nav a:hover {
-  color: #ffe14c;
+  text-decoration: underline;
 }
 
 nav a:active {
-  color: #e5a1b8;
+  text-decoration: underline;
 }
 
 @media only screen and (min-width: 768px) {
