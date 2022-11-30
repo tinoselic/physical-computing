@@ -1,8 +1,6 @@
 @font-face {
   font-family: "Jost Regular";
   src: url("assets/Jost-Regular.ttf");
-  font-family: "Jost Bold";
-  src: url("assets/Jost-Bold.ttf");
 }
 
 * {
@@ -16,7 +14,7 @@
 }
 
 body {
-  background: hsl(50, 55%, 90%);
+  background: hsl(45, 55%, 90%);
 }
 
 nav {
@@ -30,7 +28,7 @@ nav {
 nav ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
   text-align: center;
 }
 
