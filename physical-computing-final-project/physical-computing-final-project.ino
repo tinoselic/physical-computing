@@ -10,7 +10,7 @@
 int idlePin = 2;    // Handset
 int dialPin = 10;   // Control of rotary-dial
 int numberPin = 9;  // Number dial
-int ringerPins[] = {3, 4};
+int ringerPins[] = { 3, 4 };
 
 // States
 int state = 0;
@@ -116,7 +116,6 @@ void loop() {
     // Alarm set
     case 10:
       delay(1000);
-      Serial.println("Alarm is ringing.");
       state = 100;
       break;
 
@@ -134,8 +133,10 @@ void loop() {
               break;
             }
             digitalWrite(ringerPins[0], i%2);
-            digitalWrite(ringerPins[1], 1-(i%2));
-            delay(20);
+            Serial.println(i%2);
+            digitalWrite(ringerPins[1], 1-i%2);
+            Serial.println(1-i%2);
+            delay(40);
           }
           // 0.2 seconds off
           delay(200);
@@ -145,8 +146,7 @@ void loop() {
         digitalWrite(ringerPins[1], LOW);
         lastRingTime = now;
       }
-      if (idleSwitch.fell()) {
-        Serial.println("Alarm ended.");
+      if (idleSwitch.rose()) {
         Serial.println("Back to idle.");
         state = 0;
       }
