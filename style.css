@@ -72,9 +72,10 @@ nav ul li a {
 }
 
 .post-title {
+  margin-top: 25px;
+  margin-bottom: 5px;
   font-size: x-large;
   line-height: 1;
-  margin-bottom: 5px;
 }
 
 .text-container {
