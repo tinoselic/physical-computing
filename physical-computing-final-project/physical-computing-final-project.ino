@@ -36,7 +36,7 @@ void setup() {
   // Open the serial port
   Serial.begin(9600);
   // Print out test
-  Serial.println("Sketch is running...");
+  Serial.println("Dial: 0-Idle, 1-Set Alarm");
   // Declare pin inputs and attach debounce ojects
   pinMode(idlePin, INPUT_PULLUP);
   idleSwitch.attach(idlePin);
@@ -84,7 +84,7 @@ void loop() {
       }
       // Lifting the handset
       if (idleSwitch.fell()) {
-        Serial.println("Handset lifted.");
+        Serial.println("Handset lifted");
         state = digit;
         pulseCount = 0;
       }
@@ -97,7 +97,7 @@ void loop() {
       }
       // Check whether the dial has returned all the way
       if (dialSwitch.rose()) {
-        Serial.println("Setting the alarm...");
+        Serial.println("Set your alarm");
         // The digit 0 has 10 pulses
         if (pulseCount == 10) {
           pulseCount = 0;
@@ -108,22 +108,23 @@ void loop() {
       }
       // Confirm the alarm by placing the handset back on the telephone
       if (idleSwitch.rose()) {
-        Serial.println("Alarm set.");
+        Serial.println("Alarm set");
         state = 10;
       }
       break;
 
     // Alarm set
     case 10:
-      delay(1000);
+      delay(1000);  // Time comparison goes here
+      Serial.println("Ringing");
       state = 100;
       break;
 
       // Alarm ringing
     case 100:
+      // Ringtone: 2 x 0.4 seconds ringing, 1 x 0.2 seconds pause
       int now = millis();
       if (now - lastRingTime > 4000) {
-        // Ringtone: 0.4 seconds on, 0.2 seconds off
         for (int j = 0; j < 2; j++) {
           for (int i = 0; i < 20; i++) {
             // Check if the handset is lifted to end the ringing
@@ -132,10 +133,8 @@ void loop() {
               j = 2;
               break;
             }
-            digitalWrite(ringerPins[0], i%2);
-            Serial.println(i%2);
-            digitalWrite(ringerPins[1], 1-i%2);
-            Serial.println(1-i%2);
+            digitalWrite(ringerPins[0], i % 2);
+            digitalWrite(ringerPins[1], 1 - i % 2);
             delay(40);
           }
           // 0.2 seconds off
@@ -147,7 +146,7 @@ void loop() {
         lastRingTime = now;
       }
       if (idleSwitch.rose()) {
-        Serial.println("Back to idle.");
+        Serial.println("Back to idle");
         state = 0;
       }
       break;
