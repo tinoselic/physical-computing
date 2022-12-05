@@ -28,6 +28,11 @@ int pulseCount = 0;
 // The dialled digit
 int digit = 0;
 
+// Alarm variables
+bool alarmActive = false; // State of the alarm (on/off)
+int alarmHours;           // hh
+int alarmMinutes;         // mm
+
 // Time interval between ringing; ringtone
 unsigned long lastRingTime;
 
@@ -35,9 +40,6 @@ unsigned long lastRingTime;
 Bounce idleSwitch = Bounce();
 Bounce dialSwitch = Bounce();
 Bounce numberSwitch = Bounce();
-
-// Ensure that the dialled time is empty
-//memset(clock, 0, MAXDIGITS);
 
 void setup() {
   // Open the serial port
@@ -72,35 +74,41 @@ void loop() {
   dialSwitch.update();
   numberSwitch.update();
 
-  // // If the handset is placed on the telephone, the telephone becomes idle (no matter when)
-  // if (idleSwitch.rose()) {
-  //   state = 0;
-  //   pulseCount = 0;
-  //   Serial.println("Back to idle.");
-  // }
+  // Print out the state of the handset
+  if (idleSwitch.rose()) {
+    Serial.println("Handset placed");
+  }
+  if (idleSwitch.fell()) {
+    Serial.println("Handset lifted");
+  }
 
   DateTime now = RTC.now();
-  Serial.print("Date: ");
-  Serial.print(now.day(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.year(), DEC);
-  Serial.print("  ");
-  Serial.print("Time: ");
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.println();
-  Serial.print("-------------------------------------");
-  Serial.println();
-  delay(1000);
+  // Serial.print("Date: ");
+  // Serial.print(now.day(), DEC);
+  // Serial.print('/');
+  // Serial.print(now.month(), DEC);
+  // Serial.print('/');
+  // Serial.print(now.year(), DEC);
+  // Serial.print("  ");
+  // Serial.print("Time: ");
+  // Serial.print(now.hour(), DEC);
+  // Serial.print(':');
+  // Serial.print(now.minute(), DEC);
+  // Serial.print(':');
+  // Serial.print(now.second(), DEC);
+  // Serial.println();
+  // Serial.print("-------------------------------------");
+  // Serial.println();
+  // delay(1000);
 
   switch (state) {
     // Idle
     case 0:
+      // Time-alarm comparison
+      if (now.hour() == alarmHours && now.minute() == alarmMinutes && now.second() == 0) {
+        Serial.println("Alarm ringing");
+        state = 10;
+      }
       if (numberSwitch.rose()) {
         pulseCount++;
       }
@@ -119,7 +127,6 @@ void loop() {
         Serial.print("Mode ");
         Serial.println(digit);
         state = digit;
-        pulseCount = 0;
       }
       break;
 
@@ -141,20 +148,14 @@ void loop() {
       }
       // Confirm the alarm by placing the handset back on the telephone
       if (idleSwitch.rose()) {
+        alarmActive = true;
         Serial.println("Alarm set");
-        state = 10;
+        state = 0;
       }
       break;
 
-    // Alarm set
+    // Alarm ringing
     case 10:
-      delay(1000);  // Time comparison goes here
-      Serial.println("Ringing");
-      state = 100;
-      break;
-
-      // Alarm ringing
-    case 100:
       // Ringtone: 2 x 0.4 seconds ringing, 1 x 0.2 seconds pause
       int now = millis();
       if (now - lastRingTime > 4000) {
@@ -163,6 +164,7 @@ void loop() {
             // Check if the handset is lifted to end the ringing
             idleSwitch.update();
             if (idleSwitch.fell()) {
+              alarmActive = false;
               j = 2;
               Serial.println("Ringing ended");
               break;
@@ -181,6 +183,7 @@ void loop() {
       }
       if (idleSwitch.rose()) {
         Serial.println("Back to idle");
+        alarmActive = false;
         state = 0;
       }
       break;
