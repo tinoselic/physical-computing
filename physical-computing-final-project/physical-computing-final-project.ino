@@ -29,9 +29,11 @@ int pulseCount = 0;
 int digit = 0;
 
 // Alarm variables
-bool alarmActive = false; // State of the alarm (on/off)
-int alarmHours;           // hh
-int alarmMinutes;         // mm
+bool alarmActive = false;  // State of the alarm (on/off)
+int alarmDigit = 0;
+int alarmTime[4];
+int alarmHours;
+int alarmMinutes;
 
 // Time interval between ringing; ringtone
 unsigned long lastRingTime;
@@ -144,12 +146,21 @@ void loop() {
         }
         digit = pulseCount;
         Serial.println(digit);
+        alarmTime[alarmDigit] = digit;
+        alarmDigit++;
         pulseCount = 0;
       }
       // Confirm the alarm by placing the handset back on the telephone
       if (idleSwitch.rose()) {
+        alarmDigit = 0;
+        alarmHours = alarmTime[0] * 10 + alarmTime[1];
+        alarmMinutes = alarmTime[2] * 10 + alarmTime[3];
         alarmActive = true;
-        Serial.println("Alarm set");
+        Serial.print("Alarm set at: ");
+        Serial.print(alarmHours);
+        Serial.print(":");
+        Serial.println(alarmMinutes);
+        Serial.println("Back to idle");
         state = 0;
       }
       break;
