@@ -127,10 +127,10 @@ void loop() {
   numberSwitch.update();
 
   // Print out the state of the handset
-  if (idleSwitch.fell()) {
+  if (idleSwitch.rose()) {
     Serial.println("Handset lifted");
   }
-  if (idleSwitch.rose()) {
+  if (idleSwitch.fell()) {
     Serial.println("Handset placed");
   }
 
@@ -144,7 +144,7 @@ void loop() {
       }
       dialling();
       // Switch the mode by lifting the handset
-      if (idleSwitch.fell()) {
+      if (idleSwitch.rose()) {
         Serial.print("Mode ");
         Serial.println(number);
         mode = number;
@@ -184,7 +184,7 @@ void loop() {
         }
       }
       // Confirm the alarm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         if (alarmValid) {
           alarmHours = alarmTime[0] * 10 + alarmTime[1];
           alarmMinutes = alarmTime[2] * 10 + alarmTime[3];
@@ -212,7 +212,7 @@ void loop() {
         for (int i = 0; i < 20; i++) {
           // Check if the handset is lifted to end the ringing
           idleSwitch.update();
-          if (idleSwitch.fell()) {
+          if (idleSwitch.rose()) {
             alarmActive = false;
             Serial.print("Ringing ended at: ");
             Serial.print(RTC.now().hour(), DEC);
@@ -233,7 +233,7 @@ void loop() {
       digitalWrite(ringerPins[0], LOW);
       digitalWrite(ringerPins[1], LOW);
 
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Alarm off");
         Serial.println("Mode 0");
         alarmActive = false;
@@ -248,7 +248,7 @@ void loop() {
       //Serial.println("Set the brightness of the light");
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Brightness set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -263,7 +263,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 3 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -276,7 +276,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 4 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -289,7 +289,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 5 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -302,7 +302,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 6 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -315,7 +315,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 7 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -328,7 +328,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 8 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -341,7 +341,7 @@ void loop() {
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
-      if (idleSwitch.rose()) {
+      if (idleSwitch.fell()) {
         Serial.println("Mode 9 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
