@@ -21,6 +21,19 @@ RTC_DS1307 RTC;
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 32
 
+// Number of snowflakes in the animation
+#define NUMFLAKES 10
+
+// Bitmap image
+#define LOGO_HEIGHT   21
+#define LOGO_WIDTH    21
+static const unsigned char PROGMEM logo_bmp[] = {
+	0x00, 0x88, 0x00, 0x00, 0x50, 0x00, 0x00, 0x20, 0x00, 0x08, 0x20, 0x80, 0x18, 0x70, 0xc0, 0x04, 
+	0x21, 0x00, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x80, 0xa8, 0x08, 0x48, 0x70, 0x90, 0x3f, 0xdf, 
+	0xe0, 0x48, 0x70, 0x90, 0x80, 0xa8, 0x08, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x04, 0x21, 0x00, 
+	0x18, 0x70, 0xc0, 0x08, 0x20, 0x80, 0x00, 0x20, 0x00, 0x00, 0x50, 0x00, 0x00, 0x88, 0x00
+};
+
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 // The pins for I2C are defined by the Wire-library.
 // On an arduino UNO:       A4(SDA), A5(SCL)
@@ -230,9 +243,9 @@ void loop() {
 
     // Lights
     case 2:
-      Serial.println("Light");
+      //Serial.println("Light");
       number = 0;
-      Serial.println("Set the brightness of the light");
+      //Serial.println("Set the brightness of the light");
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.rose()) {
@@ -244,6 +257,9 @@ void loop() {
 
     // Mode 3
     case 3:
+      if (idleSwitch.read() == LOW) {
+        drawLine();  // Draw many lines
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -256,6 +272,7 @@ void loop() {
 
     // Mode 4
     case 4:
+      drawRect();  // Draw rectangles (outlines)
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -268,6 +285,7 @@ void loop() {
 
     // Mode 5
     case 5:
+      drawCircle();  // Draw circles (outlines)
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -280,6 +298,7 @@ void loop() {
 
     // Mode 6
     case 6:
+      drawRoundRect();  // Draw rounded rectangles (outlines)
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -292,6 +311,7 @@ void loop() {
 
     // Mode 7
     case 7:
+      drawTriangle();  // Draw triangles (outlines)
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -304,6 +324,7 @@ void loop() {
 
     // Mode 8
     case 8:
+      drawScrollText();  // Draw scrolling text
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -316,6 +337,7 @@ void loop() {
 
     // Mode 9
     case 9:
+      drawAnimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT);  // Animate bitmaps
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
@@ -332,14 +354,27 @@ void loop() {
 
   // Display
   if (dialSwitch.read() == HIGH) {
-    drawTime();
+    drawHome();
   }
-  // if (dialSwitch.read() == LOW) {
-  //   drawDial();
-  // }
 }
 
-void drawTime(void) {
+void dialling() {
+  if (numberSwitch.rose()) {
+    pulseCount++;
+  }
+  // Check whether the dial has returned all the way
+  if (dialSwitch.rose()) {
+    // The number 0 has 10 pulses
+    if (pulseCount == 10) {
+      pulseCount = 0;
+    }
+    number = pulseCount;
+    Serial.println(number);
+    pulseCount = 0;
+  }
+}
+
+void drawHome(void) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
@@ -397,20 +432,7 @@ void drawTime(void) {
   // Mode
   display.print("Mode:  ");
   display.print(mode);
-  display.println();
-
-  // Show the display buffer on the screen. You MUST call display() after
-  // drawing commands to make them visible on screen!
-  display.display();
-}
-
-void drawDial(void) {
-  display.clearDisplay();
-  display.setTextSize(2);
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(50, 10);
-
-  // Dial
+  display.print("       Dial:");
   display.print(number);
   display.println();
 
@@ -419,18 +441,187 @@ void drawDial(void) {
   display.display();
 }
 
-void dialling() {
-  if (numberSwitch.rose()) {
-    pulseCount++;
+void drawLine() {
+  int16_t i;
+
+  display.clearDisplay();  // Clear display buffer
+
+  for (i = 0; i < display.width(); i += 4) {
+    display.drawLine(0, 0, i, display.height() - 1, SSD1306_WHITE);
+    display.display();  // Update screen with each newly-drawn line
+    delay(1);
   }
-  // Check whether the dial has returned all the way
-  if (dialSwitch.rose()) {
-    // The number 0 has 10 pulses
-    if (pulseCount == 10) {
-      pulseCount = 0;
+  for (i = 0; i < display.height(); i += 4) {
+    display.drawLine(0, 0, display.width() - 1, i, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+  delay(250);
+
+  display.clearDisplay();
+
+  for (i = 0; i < display.width(); i += 4) {
+    display.drawLine(0, display.height() - 1, i, 0, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+  for (i = display.height() - 1; i >= 0; i -= 4) {
+    display.drawLine(0, display.height() - 1, display.width() - 1, i, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+  delay(250);
+
+  display.clearDisplay();
+
+  for (i = display.width() - 1; i >= 0; i -= 4) {
+    display.drawLine(display.width() - 1, display.height() - 1, i, 0, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+  for (i = display.height() - 1; i >= 0; i -= 4) {
+    display.drawLine(display.width() - 1, display.height() - 1, 0, i, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+  delay(250);
+
+  display.clearDisplay();
+
+  for (i = 0; i < display.height(); i += 4) {
+    display.drawLine(display.width() - 1, 0, 0, i, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+  for (i = 0; i < display.width(); i += 4) {
+    display.drawLine(display.width() - 1, 0, i, display.height() - 1, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+
+  delay(2000);  // Pause for 2 seconds
+}
+
+void drawRect(void) {
+  display.clearDisplay();
+
+  for (int16_t i = 0; i < display.height() / 2; i += 2) {
+    display.drawRect(i, i, display.width() - 2 * i, display.height() - 2 * i, SSD1306_WHITE);
+    display.display();  // Update screen with each newly-drawn rectangle
+    delay(1);
+  }
+
+  delay(2000);
+}
+
+void drawCircle(void) {
+  display.clearDisplay();
+
+  for (int16_t i = 0; i < max(display.width(), display.height()) / 2; i += 2) {
+    display.drawCircle(display.width() / 2, display.height() / 2, i, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+
+  delay(2000);
+}
+
+void drawRoundRect(void) {
+  display.clearDisplay();
+
+  for (int16_t i = 0; i < display.height() / 2 - 2; i += 2) {
+    display.drawRoundRect(i, i, display.width() - 2 * i, display.height() - 2 * i,
+                          display.height() / 4, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+
+  delay(2000);
+}
+
+void drawTriangle(void) {
+  display.clearDisplay();
+
+  for (int16_t i = 0; i < max(display.width(), display.height()) / 2; i += 5) {
+    display.drawTriangle(
+      display.width() / 2, display.height() / 2 - i,
+      display.width() / 2 - i, display.height() / 2 + i,
+      display.width() / 2 + i, display.height() / 2 + i, SSD1306_WHITE);
+    display.display();
+    delay(1);
+  }
+
+  delay(2000);
+}
+
+void drawScrollText(void) {
+  display.clearDisplay();
+
+  display.setTextSize(2);  // Draw 2X-scale text
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 0);
+  display.println(F("COOL"));
+  display.display();  // Show initial text
+  delay(100);
+
+  // Scroll in various directions, pausing in-between:
+  display.startscrollright(0x00, 0x0F);
+  delay(2000);
+  display.stopscroll();
+  delay(1000);
+  display.startscrollleft(0x00, 0x0F);
+  delay(2000);
+  display.stopscroll();
+  delay(1000);
+  display.startscrolldiagright(0x00, 0x07);
+  delay(2000);
+  display.startscrolldiagleft(0x00, 0x07);
+  delay(2000);
+  display.stopscroll();
+  delay(1000);
+}
+
+#define XPOS 0  // Indexes into the 'icons' array in function below
+#define YPOS 1
+#define DELTAY 2
+
+void drawAnimate(const uint8_t *bitmap, uint8_t w, uint8_t h) {
+  int8_t f, icons[NUMFLAKES][3];
+
+  // Initialize 'snowflake' positions
+  for (f = 0; f < NUMFLAKES; f++) {
+    icons[f][XPOS] = random(1 - LOGO_WIDTH, display.width());
+    icons[f][YPOS] = -LOGO_HEIGHT;
+    icons[f][DELTAY] = random(1, 6);
+    Serial.print(F("x: "));
+    Serial.print(icons[f][XPOS], DEC);
+    Serial.print(F(" y: "));
+    Serial.print(icons[f][YPOS], DEC);
+    Serial.print(F(" dy: "));
+    Serial.println(icons[f][DELTAY], DEC);
+  }
+
+  for (;;) {                 // Loop forever...
+    display.clearDisplay();  // Clear the display buffer
+
+    // Draw each snowflake:
+    for (f = 0; f < NUMFLAKES; f++) {
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], bitmap, w, h, SSD1306_WHITE);
     }
-    number = pulseCount;
-    Serial.println(number);
-    pulseCount = 0;
+
+    display.display();  // Show the display buffer on the screen
+    delay(200);         // Pause for 1/10 second
+
+    // Then update coordinates of each flake...
+    for (f = 0; f < NUMFLAKES; f++) {
+      icons[f][YPOS] += icons[f][DELTAY];
+      // If snowflake is off the bottom of the screen...
+      if (icons[f][YPOS] >= display.height()) {
+        // Reinitialize to a random position, just off the top
+        icons[f][XPOS] = random(1 - LOGO_WIDTH, display.width());
+        icons[f][YPOS] = -LOGO_HEIGHT;
+        icons[f][DELTAY] = random(1, 6);
+      }
+    }
   }
 }
