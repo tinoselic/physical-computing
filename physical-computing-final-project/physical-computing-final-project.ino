@@ -14,38 +14,21 @@
 // Define an object of RTC_DS1307 class
 RTC_DS1307 RTC;
 
+// Storing the current time in a variable
+//DateTime now = RTC.now();
+
 // OLED display width and height in pixels
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 32
 
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
-// The pins for I2C are defined by the Wire-library. 
+// The pins for I2C are defined by the Wire-library.
 // On an arduino UNO:       A4(SDA), A5(SCL)
 // On an arduino MEGA 2560: 20(SDA), 21(SCL)
 // On an arduino LEONARDO:   2(SDA),  3(SCL), ...
-#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+#define OLED_RESET -1        // Reset pin # (or -1 if sharing Arduino reset pin)
+#define SCREEN_ADDRESS 0x3C  ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-
-#define LOGO_HEIGHT   16
-#define LOGO_WIDTH    16
-static const unsigned char PROGMEM logo_bmp[] =
-{ 0b00000000, 0b11000000,
-  0b00000001, 0b11000000,
-  0b00000001, 0b11000000,
-  0b00000011, 0b11100000,
-  0b11110011, 0b11100000,
-  0b11111110, 0b11111000,
-  0b01111110, 0b11111111,
-  0b00110011, 0b10011111,
-  0b00011111, 0b11111100,
-  0b00001101, 0b01110000,
-  0b00011011, 0b10100000,
-  0b00111111, 0b11100000,
-  0b00111111, 0b11110000,
-  0b01111100, 0b11110000,
-  0b01110000, 0b01110000,
-  0b00000000, 0b00110000 };
 
 // Maximum number of digits that can be dialled (Time: hh:mm = 4), must be static
 #define MAXDIGITS 4
@@ -85,7 +68,9 @@ void setup() {
   // Open the serial port
   Serial.begin(9600);
   // Print out test
-  Serial.println("Dial: 0-Idle, 1-Alarm, 2-Light, 3-Mode 3,..., 9-Mode 9");
+  Serial.println(__FILE__);
+  Serial.println("Compiled: "__DATE__
+                 ", "__TIME__);
   // Declare pin inputs and attach debounce ojects
   pinMode(idlePin, INPUT_PULLUP);
   idleSwitch.attach(idlePin);
@@ -106,6 +91,20 @@ void setup() {
     Serial.println("RTC is NOT running!");
     RTC.adjust(DateTime(__DATE__, __TIME__));
   }
+
+  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
+  if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;)
+      ;  // Don't proceed, loop forever
+  }
+
+  // Show initial display buffer contents on the screen --
+  // the library initializes this with an Adafruit splash screen.
+  display.display();
+  delay(3000);  // Pause for 2 seconds
+  // Clear the buffer
+  display.clearDisplay();
 }
 
 void loop() {
@@ -122,30 +121,11 @@ void loop() {
     Serial.println("Handset placed");
   }
 
-  DateTime now = RTC.now();
-  // Serial.print("Date: ");
-  // Serial.print(now.day(), DEC);
-  // Serial.print('/');
-  // Serial.print(now.month(), DEC);
-  // Serial.print('/');
-  // Serial.print(now.year(), DEC);
-  // Serial.print("  ");
-  // Serial.print("Time: ");
-  // Serial.print(now.hour(), DEC);
-  // Serial.print(':');
-  // Serial.print(now.minute(), DEC);
-  // Serial.print(':');
-  // Serial.print(now.second(), DEC);
-  // Serial.println();
-  // Serial.print("-------------------------------------");
-  // Serial.println();
-  // delay(1000);
-
   switch (mode) {
     // Idle
     case 0:
       // Time-alarm comparison
-      if (alarmActive && now.hour() == alarmHours && now.minute() == alarmMinutes && now.second() == 0) {
+      if (alarmActive && RTC.now().hour() == alarmHours && RTC.now().minute() == alarmMinutes && RTC.now().second() == 0) {
         Serial.println("Alarm ringing");
         mode = 10;
       }
@@ -173,51 +153,14 @@ void loop() {
         }
         number = pulseCount;
         pulseCount = 0;
-        // Check, if the dialled numbers are valid/invalid for the specific time digit (00:00 ... 23:59)
-        // switch (alarmDigit) {
-        //   case 0:
-        //     if (number > 2) {
-        //       Serial.println("0: Invalid number. Please dial the time in 24h-format (hh:mm).");
-        //       alarmDigit = 0;
-        //     } else {
-        //       alarmTime[0] = number;
-        //       Serial.println("Set alarm in 24h-format: ");
-        //       Serial.print(alarmTime[0]);
-        //     }
-        //     break;
-        //   case 1:
-        //     if (alarmTime[0] == 2 && number > 3) {
-        //       Serial.println("1: Invalid number. Please dial the time in 24h-format (hh:mm).");
-        //       alarmDigit = 0;
-        //     } else {
-        //       alarmTime[1] = number;
-        //       Serial.print(alarmTime[1]);
-        //       Serial.print(":");
-        //     }
-        //     break;
-        //   case 2:
-        //     if (number > 5) {
-        //       Serial.println("2: Invalid number. Please dial the time in 24h-format (hh:mm).");
-        //       alarmDigit = 0;
-        //     } else {
-        //       alarmTime[2] = number;
-        //       Serial.print(alarmTime[2]);
-        //     }
-        //     break;
-        //   case 3:
-        //     alarmTime[3] = number;
-        //     Serial.println(alarmTime[3]);
-        //     break;
-        //   default:
-        //     mode = 0;
-        // }
+
         alarmTime[alarmDigit] = number;
         Serial.println("Set alarm in 24h-format: ");
-        Serial.print(alarmTime[alarmDigit]);
+        Serial.println(alarmTime[alarmDigit]);
         alarmDigit++;
         if (alarmDigit == 4) {
           if (alarmTime[0] > 2 || alarmTime[0] == 2 && alarmTime[1] > 3 || alarmTime[2] > 5) {
-            Serial.println("Invalid time. Please dial use the 24h-format: hh:mm");
+            Serial.println("Invalid time. Please use the 24h-format: hh:mm");
             alarmValid = false;
           } else {
             alarmValid = true;
@@ -259,11 +202,11 @@ void loop() {
           if (idleSwitch.fell()) {
             alarmActive = false;
             Serial.print("Ringing ended at: ");
-            Serial.print(now.hour(), DEC);
+            Serial.print(RTC.now().hour(), DEC);
             Serial.print(':');
-            Serial.print(now.minute(), DEC);
+            Serial.print(RTC.now().minute(), DEC);
             Serial.print(":");
-            Serial.println(now.second(), DEC);
+            Serial.println(RTC.now().second(), DEC);
             break;
           }
           digitalWrite(ringerPins[0], i % 2);
@@ -271,7 +214,7 @@ void loop() {
           delay(40);  // time between hits
         }
         // seconds between ringing
-        delay(400);
+        delay(1000);
       }
       // Stop ringing
       digitalWrite(ringerPins[0], LOW);
@@ -386,6 +329,94 @@ void loop() {
     default:
       mode = 0;
   }
+
+  // Display
+  if (dialSwitch.read() == HIGH) {
+    drawTime();
+  }
+  // if (dialSwitch.read() == LOW) {
+  //   drawDial();
+  // }
+}
+
+void drawTime(void) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+
+  // Display date and time
+  display.print("Date:  ");
+  if (RTC.now().day() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().day(), DEC);
+  display.print('/');
+  if (RTC.now().month() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().month(), DEC);
+  display.print('/');
+  display.print(RTC.now().year(), DEC);
+  display.println();
+  display.print("Time:  ");
+  if (RTC.now().hour() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().hour(), DEC);
+  display.print(':');
+  if (RTC.now().minute() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().minute(), DEC);
+  display.print(':');
+  if (RTC.now().second() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().second(), DEC);
+  display.println();
+
+  // Alarm on/off
+  display.print("Alarm: ");
+  if (alarmActive) {
+    if (alarmHours < 10) {
+      display.print("0");
+    }
+    display.print(alarmHours);
+    display.print(":");
+    if (alarmMinutes < 10) {
+      display.print("0");
+    }
+    display.print(alarmMinutes);
+    display.println();
+  } else {
+    display.print("off");
+    display.println();
+  }
+
+  // Mode
+  display.print("Mode:  ");
+  display.print(mode);
+  display.println();
+
+  // Show the display buffer on the screen. You MUST call display() after
+  // drawing commands to make them visible on screen!
+  display.display();
+}
+
+void drawDial(void) {
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(50, 10);
+
+  // Dial
+  display.print(number);
+  display.println();
+
+  // Show the display buffer on the screen. You MUST call display() after
+  // drawing commands to make them visible on screen!
+  display.display();
 }
 
 void dialling() {
