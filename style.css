@@ -8,16 +8,15 @@
   margin: 0;
   list-style: none;
   box-sizing: border-box;
-  color: hsl(50, 5%, 10%);
 }
 
 body {
-  background: #f9f9f9;
+  background: #fafafa;
   font-family: "Jost Regular", sans-serif;
 }
 
 nav {
-  background: hsla(40, 6%, 10%, 0.95);
+  background: #fafafaee;
   width: 100%;
   height: 50px;
   position: fixed;
@@ -55,27 +54,29 @@ nav ul li a {
 }
 
 .content-name {
-  margin-top: 50px;
-  margin-bottom: 25px;
+  margin-top: 75px;
   font-size: xx-large;
   line-height: 1;
 }
 
 .introduction {
   font-size: large;
-  margin-bottom: 50px;
+  margin-top: 25px;
 }
 
 .post {
   column-gap: 25px;
-  margin-bottom: 50px;
+  margin-top: 100px;
 }
 
 .post-title {
   margin-top: 25px;
-  margin-bottom: 5px;
   font-size: x-large;
   line-height: 1;
+}
+
+.post-date {
+  margin: 5px 0px 25px 0px;
 }
 
 .text-container {
@@ -116,18 +117,18 @@ nav ul li a {
 }
 
 .footer {
-  margin-bottom: 25px;
+  margin: 25px 0px 25px 0px;
   text-align: center;
   font-size: x-small;
 }
 
 nav a:link {
   text-decoration: none;
-  color: #f9f9f9;
+  color: #000000;
 }
 
 nav a:visited {
-  color: #f9f9f9;
+  color: #000000;
 }
 
 nav a:hover {

@@ -25,13 +25,13 @@ RTC_DS1307 RTC;
 #define NUMFLAKES 10
 
 // Bitmap image
-#define LOGO_HEIGHT   21
-#define LOGO_WIDTH    21
+#define LOGO_HEIGHT 21
+#define LOGO_WIDTH 21
 static const unsigned char PROGMEM logo_bmp[] = {
-	0x00, 0x88, 0x00, 0x00, 0x50, 0x00, 0x00, 0x20, 0x00, 0x08, 0x20, 0x80, 0x18, 0x70, 0xc0, 0x04, 
-	0x21, 0x00, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x80, 0xa8, 0x08, 0x48, 0x70, 0x90, 0x3f, 0xdf, 
-	0xe0, 0x48, 0x70, 0x90, 0x80, 0xa8, 0x08, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x04, 0x21, 0x00, 
-	0x18, 0x70, 0xc0, 0x08, 0x20, 0x80, 0x00, 0x20, 0x00, 0x00, 0x50, 0x00, 0x00, 0x88, 0x00
+  0x00, 0x88, 0x00, 0x00, 0x50, 0x00, 0x00, 0x20, 0x00, 0x08, 0x20, 0x80, 0x18, 0x70, 0xc0, 0x04,
+  0x21, 0x00, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x80, 0xa8, 0x08, 0x48, 0x70, 0x90, 0x3f, 0xdf,
+  0xe0, 0x48, 0x70, 0x90, 0x80, 0xa8, 0x08, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x04, 0x21, 0x00,
+  0x18, 0x70, 0xc0, 0x08, 0x20, 0x80, 0x00, 0x20, 0x00, 0x00, 0x50, 0x00, 0x00, 0x88, 0x00
 };
 
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
@@ -47,9 +47,9 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define MAXDIGITS 4
 
 // Pins
-int idlePin = 2;    // Handset
-int dialPin = 10;   // Control of rotary-dial
-int numberPin = 9;  // Number dial
+int idlePin = 11;    // Handset
+int dialPin = 12;    // Control of rotary-dial
+int numberPin = 13;  // Number dial
 int ringerPins[] = { 3, 4 };
 
 // Modes
@@ -137,6 +137,10 @@ void loop() {
   switch (mode) {
     // Idle
     case 0:
+      // Display
+      if (dialSwitch.read() == HIGH) {
+        drawHome();
+      }
       // Time-alarm comparison
       if (alarmActive && RTC.now().hour() == alarmHours && RTC.now().minute() == alarmMinutes && RTC.now().second() == 0) {
         Serial.println("Alarm ringing");
@@ -206,6 +210,10 @@ void loop() {
 
     // Alarm ringing
     case 10:
+      // Display
+      if (dialSwitch.read() == HIGH) {
+        drawHome();
+      }
       number = 0;
       // Ringtone: ringing, 1 x 0.4 seconds pause
       while (alarmActive) {
@@ -257,13 +265,15 @@ void loop() {
 
     // Mode 3
     case 3:
-      if (idleSwitch.read() == LOW) {
+      while (idleSwitch.read() == HIGH) {
         drawLine();  // Draw many lines
+        break;
       }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 3 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -272,11 +282,14 @@ void loop() {
 
     // Mode 4
     case 4:
-      drawRect();  // Draw rectangles (outlines)
+      if (idleSwitch.read() == HIGH) {
+        drawRect();  // Draw rectangles (outlines)
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 4 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -285,11 +298,14 @@ void loop() {
 
     // Mode 5
     case 5:
-      drawCircle();  // Draw circles (outlines)
+      if (idleSwitch.read() == HIGH) {
+        drawCircle();  // Draw circles (outlines)
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 5 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -298,11 +314,14 @@ void loop() {
 
     // Mode 6
     case 6:
-      drawRoundRect();  // Draw rounded rectangles (outlines)
+      if (idleSwitch.read() == HIGH) {
+        drawRoundRect();  // Draw rounded rectangles (outlines)
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 6 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -311,11 +330,14 @@ void loop() {
 
     // Mode 7
     case 7:
-      drawTriangle();  // Draw triangles (outlines)
+      if (idleSwitch.read() == HIGH) {
+        drawTriangle();  // Draw triangles (outlines)
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 7 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -324,11 +346,14 @@ void loop() {
 
     // Mode 8
     case 8:
-      drawScrollText();  // Draw scrolling text
+      if (idleSwitch.read() == HIGH) {
+        drawScrollText();  // Draw scrolling text
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 8 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -337,11 +362,14 @@ void loop() {
 
     // Mode 9
     case 9:
-      drawAnimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT);  // Animate bitmaps
+      if (idleSwitch.read() == HIGH) {
+        drawAnimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT);  // Animate bitmaps
+      }
       number = 0;
       dialling();
       // Confirm by placing the handset back on the telephone
       if (idleSwitch.fell()) {
+        display.clearDisplay();
         Serial.println("Mode 9 set");
         Serial.println("Mode 0");
         mode = 0;  // Change this
@@ -350,11 +378,6 @@ void loop() {
 
     default:
       mode = 0;
-  }
-
-  // Display
-  if (dialSwitch.read() == HIGH) {
-    drawHome();
   }
 }
 
@@ -498,8 +521,7 @@ void drawLine() {
     display.display();
     delay(1);
   }
-
-  delay(2000);  // Pause for 2 seconds
+  delay(250);
 }
 
 void drawRect(void) {
