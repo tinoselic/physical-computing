@@ -128,15 +128,15 @@ nav ul li a {
 
 nav a:link {
   text-decoration: none;
-  color: #808080;
+  color: #ffffff;
 }
 
 nav a:visited {
-  color: #808080;
+  color: #ffffff;
 }
 
 nav a:hover {
-  color: #ffffff;
+  color: #808080;
 }
 
 nav a:active {
@@ -151,6 +151,11 @@ a:link {
 a:hover {
   color: #ffffff;
   text-decoration: underline;
+}
+
+a:visited {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 @media only screen and (min-width: 768px) {
