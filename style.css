@@ -11,12 +11,14 @@
 }
 
 body {
-  background: #fafafa;
+  background: #000000;
+  color: #808080;
   font-family: "Jost Regular", sans-serif;
 }
 
 nav {
-  background: #fafafaee;
+  background: #000000;
+  color: #808080;
   width: 100%;
   height: 50px;
   position: fixed;
@@ -35,7 +37,7 @@ nav ul li {
 }
 
 nav ul li a {
-  padding: 0px 30px 0 30px;
+  padding: 0px 10px 0 10px;
   display: block;
   font-size: large;
   line-height: 50px;
@@ -55,6 +57,7 @@ nav ul li a {
 
 .content-name {
   margin-top: 75px;
+  color: #ffffff;
   font-size: xx-large;
   line-height: 1;
 }
@@ -71,6 +74,7 @@ nav ul li a {
 
 .post-title {
   margin-top: 25px;
+  color: #ffffff;
   font-size: x-large;
   line-height: 1;
 }
@@ -124,18 +128,28 @@ nav ul li a {
 
 nav a:link {
   text-decoration: none;
-  color: #000000;
+  color: #808080;
 }
 
 nav a:visited {
-  color: #000000;
+  color: #808080;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #ffffff;
 }
 
 nav a:active {
+  color: #ffffff;
+}
+
+a:link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
   text-decoration: underline;
 }
 
@@ -143,11 +157,39 @@ nav a:active {
   .content {
     margin: 0 150px;
   }
+
+  nav ul li a {
+    padding: 0px 30px 0 30px;
+  }
 }
 
 @media only screen and (min-width: 1280px) {
   .content {
     margin: 0 400px;
+  }
+
+  nav {
+    background: none;
+    width: 0%;
+    height: 0px;
+    margin: 60px 0px 0px 200px;
+  }
+  
+  nav ul {
+    display: block;
+    flex-wrap: wrap;
+    justify-content: left;
+    text-align: left;
+  }
+  
+  nav ul li {
+    display: list-item;
+  }
+  
+  nav ul li a {
+    color: #808080;
+    font-size: large;
+    line-height: 50px;
   }
 }
 
