@@ -136,11 +136,13 @@ nav a:visited {
 }
 
 nav a:hover {
-  color: #808080;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 nav a:active {
   color: #ffffff;
+  text-decoration: underline;
 }
 
 a:link {
