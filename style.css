@@ -43,6 +43,10 @@ nav ul li a {
   line-height: 50px;
 }
 
+post-nav {
+  display: none;
+}
+
 .course-name {
   padding-top: 75px;
   font-size: medium;
