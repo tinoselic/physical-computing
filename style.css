@@ -1,6 +1,8 @@
 @font-face {
   font-family: "Jost Regular";
   src: url("assets/Jost-Regular.ttf");
+  font-family: "Audiowide";
+  src: url("assets/Audiowide-Regular.ttf");
 }
 
 * {
