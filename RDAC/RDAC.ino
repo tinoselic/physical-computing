@@ -480,7 +480,7 @@ void drawAlarm(void) {
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(30, 10);
+  display.setCursor(37, 8);
 
   // // Display time
   // display.print("Time:  ");
