@@ -147,11 +147,10 @@ void loop() {
         mode = 10;
       }
       dialling();
-      // Switch the mode by lifting the handset
+      // Switch to alarm mode by lifting the handset
       if (idleSwitch.rose()) {
-        Serial.print("Mode ");
-        Serial.println(number);
-        mode = number;
+        Serial.print("Mode 1");
+        mode = 1;
       }
       break;
 
@@ -251,143 +250,6 @@ void loop() {
       }
       break;
 
-    // Lights
-    case 2:
-      // Display
-      if (dialSwitch.read() == HIGH) {
-        drawHome();
-      }
-      //Serial.println("Light");
-      number = 0;
-      //Serial.println("Set the brightness of the light");
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        Serial.println("Brightness set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 3
-    case 3:
-      while (idleSwitch.read() == HIGH) {
-        drawLine();  // Draw many lines
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 3 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 4
-    case 4:
-      while (idleSwitch.read() == HIGH) {
-        drawRect();  // Draw rectangles (outlines)
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 4 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 5
-    case 5:
-      while (idleSwitch.read() == HIGH) {
-        drawCircle();  // Draw circles (outlines)
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 5 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 6
-    case 6:
-      while (idleSwitch.read() == HIGH) {
-        drawRoundRect();  // Draw rounded rectangles (outlines)
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 6 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 7
-    case 7:
-      while (idleSwitch.read() == HIGH) {
-        drawTriangle();  // Draw triangles (outlines)
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 7 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 8
-    case 8:
-      while (idleSwitch.read() == HIGH) {
-        drawScrollText();  // Draw scrolling text
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 8 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
-    // Mode 9
-    case 9:
-      while (idleSwitch.read() == HIGH) {
-        drawAnimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT);  // Animate bitmaps
-        break;
-      }
-      number = 0;
-      dialling();
-      // Confirm by placing the handset back on the telephone
-      if (idleSwitch.fell()) {
-        display.clearDisplay();
-        Serial.println("Mode 9 set");
-        Serial.println("Mode 0");
-        mode = 0;  // Change this
-      }
-      break;
-
     default:
       mode = 0;
   }
@@ -465,14 +327,10 @@ void drawHome(void) {
   }
 
   // Mode
-  display.print("Mode:  ");
-  display.print(mode);
-  display.print("       Dial:");
+  display.print("Dial:");
   display.print(number);
   display.println();
-
-  // Show the display buffer on the screen. You MUST call display() after
-  // drawing commands to make them visible on screen!
+  
   display.display();
 }
 
@@ -481,223 +339,12 @@ void drawAlarm(void) {
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(37, 8);
-
-  // // Display time
-  // display.print("Time:  ");
-  // if (RTC.now().hour() < 10) {
-  //   display.print("0");
-  // }
-  // display.print(RTC.now().hour(), DEC);
-  // display.print(':');
-  // if (RTC.now().minute() < 10) {
-  //   display.print("0");
-  // }
-  // display.print(RTC.now().minute(), DEC);
-  // display.print(':');
-  // if (RTC.now().second() < 10) {
-  //   display.print("0");
-  // }
-  // display.print(RTC.now().second(), DEC);
-  // display.println();
-
-  // // Alarm
-  // display.println("Dial alarm time. Use");
-  // display.println("the 24h-format: hh:mm");
-  // display.print("Alarm: ");
+  
   display.print(alarmTime[0]);
   display.print(alarmTime[1]);
   display.print(":");
   display.print(alarmTime[2]);
   display.print(alarmTime[3]);
-  // display.print("   Dial:");
-  // display.print(number);
-  // display.println();
 
-  // Show the display buffer on the screen. You MUST call display() after
-  // drawing commands to make them visible on screen!
   display.display();
-}
-
-void drawLine() {
-  int16_t i;
-
-  display.clearDisplay();  // Clear display buffer
-
-  for (i = 0; i < display.width(); i += 4) {
-    display.drawLine(0, 0, i, display.height() - 1, SSD1306_WHITE);
-    display.display();  // Update screen with each newly-drawn line
-    delay(1);
-  }
-  for (i = 0; i < display.height(); i += 4) {
-    display.drawLine(0, 0, display.width() - 1, i, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  delay(250);
-
-  display.clearDisplay();
-
-  for (i = 0; i < display.width(); i += 4) {
-    display.drawLine(0, display.height() - 1, i, 0, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  for (i = display.height() - 1; i >= 0; i -= 4) {
-    display.drawLine(0, display.height() - 1, display.width() - 1, i, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  delay(250);
-
-  display.clearDisplay();
-
-  for (i = display.width() - 1; i >= 0; i -= 4) {
-    display.drawLine(display.width() - 1, display.height() - 1, i, 0, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  for (i = display.height() - 1; i >= 0; i -= 4) {
-    display.drawLine(display.width() - 1, display.height() - 1, 0, i, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  delay(250);
-
-  display.clearDisplay();
-
-  for (i = 0; i < display.height(); i += 4) {
-    display.drawLine(display.width() - 1, 0, 0, i, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  for (i = 0; i < display.width(); i += 4) {
-    display.drawLine(display.width() - 1, 0, i, display.height() - 1, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-  delay(250);
-}
-
-void drawRect(void) {
-  display.clearDisplay();
-
-  for (int16_t i = 0; i < display.height() / 2; i += 2) {
-    display.drawRect(i, i, display.width() - 2 * i, display.height() - 2 * i, SSD1306_WHITE);
-    display.display();  // Update screen with each newly-drawn rectangle
-    delay(1);
-  }
-
-  delay(2000);
-}
-
-void drawCircle(void) {
-  display.clearDisplay();
-
-  for (int16_t i = 0; i < max(display.width(), display.height()) / 2; i += 2) {
-    display.drawCircle(display.width() / 2, display.height() / 2, i, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-
-  delay(2000);
-}
-
-void drawRoundRect(void) {
-  display.clearDisplay();
-
-  for (int16_t i = 0; i < display.height() / 2 - 2; i += 2) {
-    display.drawRoundRect(i, i, display.width() - 2 * i, display.height() - 2 * i,
-                          display.height() / 4, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-
-  delay(2000);
-}
-
-void drawTriangle(void) {
-  display.clearDisplay();
-
-  for (int16_t i = 0; i < max(display.width(), display.height()) / 2; i += 5) {
-    display.drawTriangle(
-      display.width() / 2, display.height() / 2 - i,
-      display.width() / 2 - i, display.height() / 2 + i,
-      display.width() / 2 + i, display.height() / 2 + i, SSD1306_WHITE);
-    display.display();
-    delay(1);
-  }
-
-  delay(2000);
-}
-
-void drawScrollText(void) {
-  display.clearDisplay();
-
-  display.setTextSize(2);  // Draw 2X-scale text
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("COOL"));
-  display.display();  // Show initial text
-  delay(100);
-
-  // Scroll in various directions, pausing in-between:
-  display.startscrollright(0x00, 0x0F);
-  delay(2000);
-  display.stopscroll();
-  delay(1000);
-  display.startscrollleft(0x00, 0x0F);
-  delay(2000);
-  display.stopscroll();
-  delay(1000);
-  display.startscrolldiagright(0x00, 0x07);
-  delay(2000);
-  display.startscrolldiagleft(0x00, 0x07);
-  delay(2000);
-  display.stopscroll();
-  delay(1000);
-}
-
-#define XPOS 0  // Indexes into the 'icons' array in function below
-#define YPOS 1
-#define DELTAY 2
-
-void drawAnimate(const uint8_t *bitmap, uint8_t w, uint8_t h) {
-  int8_t f, icons[NUMFLAKES][3];
-
-  // Initialize 'snowflake' positions
-  for (f = 0; f < NUMFLAKES; f++) {
-    icons[f][XPOS] = random(1 - LOGO_WIDTH, display.width());
-    icons[f][YPOS] = -LOGO_HEIGHT;
-    icons[f][DELTAY] = random(1, 6);
-    Serial.print(F("x: "));
-    Serial.print(icons[f][XPOS], DEC);
-    Serial.print(F(" y: "));
-    Serial.print(icons[f][YPOS], DEC);
-    Serial.print(F(" dy: "));
-    Serial.println(icons[f][DELTAY], DEC);
-  }
-
-  for (;;) {                 // Loop forever...
-    display.clearDisplay();  // Clear the display buffer
-
-    // Draw each snowflake:
-    for (f = 0; f < NUMFLAKES; f++) {
-      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], bitmap, w, h, SSD1306_WHITE);
-    }
-
-    display.display();  // Show the display buffer on the screen
-    delay(200);         // Pause for 1/10 second
-
-    // Then update coordinates of each flake...
-    for (f = 0; f < NUMFLAKES; f++) {
-      icons[f][YPOS] += icons[f][DELTAY];
-      // If snowflake is off the bottom of the screen...
-      if (icons[f][YPOS] >= display.height()) {
-        // Reinitialize to a random position, just off the top
-        icons[f][XPOS] = random(1 - LOGO_WIDTH, display.width());
-        icons[f][YPOS] = -LOGO_HEIGHT;
-        icons[f][DELTAY] = random(1, 6);
-      }
-    }
-  }
 }
