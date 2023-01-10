@@ -115,7 +115,7 @@ void setup() {
   // Show initial display buffer contents on the screen --
   // the library initializes this with an Adafruit splash screen.
   display.display();
-  delay(1000);  // Pause for 1 second
+  delay(2000);  // Pause for 2 seconds
   // Clear the buffer
   display.clearDisplay();
 }
@@ -149,7 +149,7 @@ void loop() {
       dialling();
       // Switch to alarm mode by lifting the handset
       if (idleSwitch.rose()) {
-        Serial.print("Mode 1");
+        Serial.println("Alarm Mode");
         mode = 1;
       }
       break;
@@ -178,13 +178,29 @@ void loop() {
         Serial.println("Set alarm in 24h-format: ");
         Serial.println(alarmTime[alarmDigit]);
         alarmDigit++;
+        if (alarmTime[0] > 2 || alarmTime[0] == 2 && alarmTime[1] > 3 || alarmTime[2] > 5) {
+          Serial.println("Invalid time. Please use the 24h-format: hh:mm");
+          display.clearDisplay();
+          display.setTextSize(1);
+          display.setTextColor(SSD1306_WHITE);
+          display.setCursor(0, 0);
+          display.println("ERROR: INVALID TIME");
+          display.println("Please use the");
+          display.println("24-hour notation:");
+          display.println("hh:mm");
+          display.display();
+          alarmDigit = 0;
+          alarmTime[0] = 0;
+          alarmTime[1] = 0;
+          alarmTime[2] = 0;
+          alarmTime[3] = 0;
+          alarmValid = false;
+          delay(5000);
+          display.clearDisplay();
+        } else {
+          alarmValid = true;
+        }
         if (alarmDigit > 3) {
-          if (alarmTime[0] > 2 || alarmTime[0] == 2 && alarmTime[1] > 3 || alarmTime[2] > 5) {
-            Serial.println("Invalid time. Please use the 24h-format: hh:mm");
-            alarmValid = false;
-          } else {
-            alarmValid = true;
-          }
           alarmDigit = 0;
         }
       }
@@ -199,11 +215,16 @@ void loop() {
           Serial.print(alarmHours);
           Serial.print(":");
           Serial.println(alarmMinutes);
-          Serial.println("Mode 0");
+          Serial.println("Idle");
           mode = 0;
         } else {
-          Serial.println("Mode 0");
+          Serial.println("Idle");
           alarmActive = false;
+          alarmDigit = 0;
+          alarmTime[0] = 0;
+          alarmTime[1] = 0;
+          alarmTime[2] = 0;
+          alarmTime[3] = 0;
           mode = 0;
         }
       }
@@ -244,7 +265,7 @@ void loop() {
 
       if (idleSwitch.fell()) {
         Serial.println("Alarm off");
-        Serial.println("Mode 0");
+        Serial.println("Idle");
         alarmActive = false;
         mode = 0;
       }
@@ -327,10 +348,10 @@ void drawHome(void) {
   }
 
   // Mode
-  display.print("Dial:");
+  display.print("Dial:  ");
   display.print(number);
   display.println();
-  
+
   display.display();
 }
 
@@ -339,7 +360,7 @@ void drawAlarm(void) {
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(37, 8);
-  
+
   display.print(alarmTime[0]);
   display.print(alarmTime[1]);
   display.print(":");
