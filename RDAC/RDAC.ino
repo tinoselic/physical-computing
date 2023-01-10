@@ -115,7 +115,7 @@ void setup() {
   // Show initial display buffer contents on the screen --
   // the library initializes this with an Adafruit splash screen.
   display.display();
-  delay(3000);  // Pause for 2 seconds
+  delay(1000);  // Pause for 1 second
   // Clear the buffer
   display.clearDisplay();
 }
@@ -158,6 +158,10 @@ void loop() {
     // Alarm Mode
     case 1:
       number = 0;
+      // Display
+      if (dialSwitch.read() == HIGH) {
+        drawAlarm();
+      }
       // Dialling
       if (numberSwitch.rose()) {
         pulseCount++;
@@ -251,6 +255,10 @@ void loop() {
 
     // Lights
     case 2:
+      // Display
+      if (dialSwitch.read() == HIGH) {
+        drawHome();
+      }
       //Serial.println("Light");
       number = 0;
       //Serial.println("Set the brightness of the light");
@@ -451,6 +459,51 @@ void drawHome(void) {
     display.print("off");
     display.println();
   }
+
+  // Mode
+  display.print("Mode:  ");
+  display.print(mode);
+  display.print("       Dial:");
+  display.print(number);
+  display.println();
+
+  // Show the display buffer on the screen. You MUST call display() after
+  // drawing commands to make them visible on screen!
+  display.display();
+}
+
+void drawAlarm(void) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0, 0);
+
+  // Display time
+  display.print("Time:  ");
+  if (RTC.now().hour() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().hour(), DEC);
+  display.print(':');
+  if (RTC.now().minute() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().minute(), DEC);
+  display.print(':');
+  if (RTC.now().second() < 10) {
+    display.print("0");
+  }
+  display.print(RTC.now().second(), DEC);
+  display.println();
+
+  // Alarm
+  display.print("Dial alarm time. Please use the 24h-format: hh:mm");  //Invalid time
+  display.print(alarmTime[0]);
+  display.print(alarmTime[1]);
+  display.print(":");
+  display.print(alarmTime[2]);
+  display.print(alarmTime[3]);
+  display.println();
 
   // Mode
   display.print("Mode:  ");
