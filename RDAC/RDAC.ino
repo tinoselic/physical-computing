@@ -179,15 +179,13 @@ void loop() {
         Serial.println("Set alarm in 24h-format: ");
         Serial.println(alarmTime[alarmDigit]);
         alarmDigit++;
-        if (alarmDigit == 4) {
+        if (alarmDigit > 3) {
           if (alarmTime[0] > 2 || alarmTime[0] == 2 && alarmTime[1] > 3 || alarmTime[2] > 5) {
             Serial.println("Invalid time. Please use the 24h-format: hh:mm");
             alarmValid = false;
           } else {
             alarmValid = true;
           }
-        }
-        if (alarmDigit > 3) {
           alarmDigit = 0;
         }
       }
@@ -290,8 +288,9 @@ void loop() {
 
     // Mode 4
     case 4:
-      if (idleSwitch.read() == HIGH) {
+      while (idleSwitch.read() == HIGH) {
         drawRect();  // Draw rectangles (outlines)
+        break;
       }
       number = 0;
       dialling();
@@ -306,8 +305,9 @@ void loop() {
 
     // Mode 5
     case 5:
-      if (idleSwitch.read() == HIGH) {
+      while (idleSwitch.read() == HIGH) {
         drawCircle();  // Draw circles (outlines)
+        break;
       }
       number = 0;
       dialling();
@@ -322,8 +322,9 @@ void loop() {
 
     // Mode 6
     case 6:
-      if (idleSwitch.read() == HIGH) {
+      while (idleSwitch.read() == HIGH) {
         drawRoundRect();  // Draw rounded rectangles (outlines)
+        break;
       }
       number = 0;
       dialling();
@@ -338,8 +339,9 @@ void loop() {
 
     // Mode 7
     case 7:
-      if (idleSwitch.read() == HIGH) {
+      while (idleSwitch.read() == HIGH) {
         drawTriangle();  // Draw triangles (outlines)
+        break;
       }
       number = 0;
       dialling();
@@ -354,8 +356,9 @@ void loop() {
 
     // Mode 8
     case 8:
-      if (idleSwitch.read() == HIGH) {
+      while (idleSwitch.read() == HIGH) {
         drawScrollText();  // Draw scrolling text
+        break;
       }
       number = 0;
       dialling();
@@ -370,8 +373,9 @@ void loop() {
 
     // Mode 9
     case 9:
-      if (idleSwitch.read() == HIGH) {
+      while (idleSwitch.read() == HIGH) {
         drawAnimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT);  // Animate bitmaps
+        break;
       }
       number = 0;
       dialling();
@@ -474,43 +478,40 @@ void drawHome(void) {
 
 void drawAlarm(void) {
   display.clearDisplay();
-  display.setTextSize(1);
+  display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 0);
+  display.setCursor(30, 10);
 
-  // Display time
-  display.print("Time:  ");
-  if (RTC.now().hour() < 10) {
-    display.print("0");
-  }
-  display.print(RTC.now().hour(), DEC);
-  display.print(':');
-  if (RTC.now().minute() < 10) {
-    display.print("0");
-  }
-  display.print(RTC.now().minute(), DEC);
-  display.print(':');
-  if (RTC.now().second() < 10) {
-    display.print("0");
-  }
-  display.print(RTC.now().second(), DEC);
-  display.println();
+  // // Display time
+  // display.print("Time:  ");
+  // if (RTC.now().hour() < 10) {
+  //   display.print("0");
+  // }
+  // display.print(RTC.now().hour(), DEC);
+  // display.print(':');
+  // if (RTC.now().minute() < 10) {
+  //   display.print("0");
+  // }
+  // display.print(RTC.now().minute(), DEC);
+  // display.print(':');
+  // if (RTC.now().second() < 10) {
+  //   display.print("0");
+  // }
+  // display.print(RTC.now().second(), DEC);
+  // display.println();
 
-  // Alarm
-  display.print("Dial alarm time. Please use the 24h-format: hh:mm");  //Invalid time
+  // // Alarm
+  // display.println("Dial alarm time. Use");
+  // display.println("the 24h-format: hh:mm");
+  // display.print("Alarm: ");
   display.print(alarmTime[0]);
   display.print(alarmTime[1]);
   display.print(":");
   display.print(alarmTime[2]);
   display.print(alarmTime[3]);
-  display.println();
-
-  // Mode
-  display.print("Mode:  ");
-  display.print(mode);
-  display.print("       Dial:");
-  display.print(number);
-  display.println();
+  // display.print("   Dial:");
+  // display.print(number);
+  // display.println();
 
   // Show the display buffer on the screen. You MUST call display() after
   // drawing commands to make them visible on screen!
