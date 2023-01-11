@@ -70,7 +70,7 @@ post-nav {
   margin-top: 75px;
   font-family: "Audiowide";
   color: #ffffff;
-  font-size: xx-large;
+  font-size: x-large;
   line-height: 1;
 }
 
@@ -82,15 +82,14 @@ post-nav {
 
 .post {
   column-gap: 25px;
-  margin-top: 100px;
+  margin-top: 75px;
   font-family: "Jost Regular";
 }
 
 .post-title {
-  margin-top: 25px;
   color: #ffffff;
   font-family: "Jost Regular";
-  font-size: x-large;
+  font-size: large;
   line-height: 1;
 }
 
