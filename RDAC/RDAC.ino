@@ -21,19 +21,6 @@ RTC_DS1307 RTC;
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 32
 
-// Number of snowflakes in the animation
-#define NUMFLAKES 10
-
-// Bitmap image
-#define LOGO_HEIGHT 21
-#define LOGO_WIDTH 21
-static const unsigned char PROGMEM logo_bmp[] = {
-  0x00, 0x88, 0x00, 0x00, 0x50, 0x00, 0x00, 0x20, 0x00, 0x08, 0x20, 0x80, 0x18, 0x70, 0xc0, 0x04,
-  0x21, 0x00, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x80, 0xa8, 0x08, 0x48, 0x70, 0x90, 0x3f, 0xdf,
-  0xe0, 0x48, 0x70, 0x90, 0x80, 0xa8, 0x08, 0x03, 0x26, 0x00, 0x03, 0x26, 0x00, 0x04, 0x21, 0x00,
-  0x18, 0x70, 0xc0, 0x08, 0x20, 0x80, 0x00, 0x20, 0x00, 0x00, 0x50, 0x00, 0x00, 0x88, 0x00
-};
-
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 // The pins for I2C are defined by the Wire-library.
 // On an arduino UNO:       A4(SDA), A5(SCL)
@@ -69,9 +56,6 @@ int alarmTime[4];
 int alarmHours;
 int alarmMinutes;
 
-// Time interval between ringing; ringtone
-unsigned long lastRingTime;
-
 // Bounce objects
 Bounce idleSwitch = Bounce();
 Bounce dialSwitch = Bounce();
@@ -82,8 +66,7 @@ void setup() {
   Serial.begin(9600);
   // Print out test
   Serial.println(__FILE__);
-  Serial.println("Compiled: "__DATE__
-                 ", "__TIME__);
+  Serial.println("Compiled: "__DATE__", "__TIME__);
   // Declare pin inputs and attach debounce ojects
   pinMode(idlePin, INPUT_PULLUP);
   idleSwitch.attach(idlePin);
@@ -178,6 +161,7 @@ void loop() {
         Serial.println("Set alarm in 24h-format: ");
         Serial.println(alarmTime[alarmDigit]);
         alarmDigit++;
+        // Check if the dialled time is in the correct 24-hour notation (hh:mm)
         if (alarmTime[0] > 2 || alarmTime[0] == 2 && alarmTime[1] > 3 || alarmTime[2] > 5) {
           Serial.println("Invalid time. Please use the 24h-format: hh:mm");
           display.clearDisplay();
@@ -347,7 +331,7 @@ void drawHome(void) {
     display.println();
   }
 
-  // Mode
+  // Dial
   display.print("Dial:  ");
   display.print(number);
   display.println();
