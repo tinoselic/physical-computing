@@ -11,31 +11,33 @@
 </head>
 
 <body>
-  <section class="header">
+  <header>
     <nav>
-      <ul>
-        <li><a href="index.html" class="type-content">Home</a></li>
-        <li><a href="docu.html" class="type-content">Docu</a></li>
-        <li><a href="code.html" class="type-content">Code</a></li>
-        <li><a href="about.html" class="type-content">About</a></li>
+      <div class="logo"><a href="index.html">
+          <h4>RD:AC</h4>
+        </a></div>
+      <div class="openMenu"><img src="assets/menu_FILL0_wght400_GRAD0_opsz48.svg" alt=""></div>
+      <ul class="mainMenu">
+        <li><a href="docu.html">Docu</a></li>
+        <li><a href="code.html" style="text-decoration: underline;">Code</a></li>
+        <li><a href="about.html">About</a></li>
+        <div class="closeMenu"><img src="assets/close_FILL0_wght400_GRAD0_opsz48.svg" alt=""></div>
       </ul>
     </nav>
-  </section>
-  <section class="content">
-    <div class="course-name">
-      <div>Physical Computing</div>
-      <div style="justify-self: end">Tino Selic</div>
-    </div>
-    <div class="content-name">Code</div>
-    <div class="introduction">
-      Here you can find all my code from the assignments and my final project.
-    </div>
-    <section class="post">
-      <div class="post-title">01 | Introduction</div>
-      <div class="post-date">Posted 25.10.22</div>
-      <div class="text-container">
-        <div class="code-title">Arduino Code</div>
-        <pre>
+  </header>
+  <main>
+    <p>Physical Computing</p>
+    <br>
+    <h1>Code</h1>
+    <br>
+    <h3>Here you can find all my code from the assignments and my final project.</h3>
+    <br>
+    <br>
+    <h3>1. Introduction</h3>
+    <p>Posted 25.10.22</p>
+    <br>
+    <h2>Arduino Code</h2>
+    <pre>
           <code>
 // A button that first turns on one LED, then another, and then turns both LEDs off again
 int btnPin = 2;
@@ -107,15 +109,11 @@ void loop() {
 }
           </code>
         </pre>
-      </div>
-    </section>
-    <section class="post">
-      <div class="post-title">04 | Communication</div>
-      <div class="post-date">Posted 21.11.22</div>
-      <div class="text-container">
-        <div class="code-title">Arduino Code</div>
-        <div class="code-content">
-          <pre>
+    <h3>4. Communication</h3>
+    <p>Posted 21.11.22</p>
+    <br>
+    <h2>Arduino Code</h2>
+    <pre>
           <code>
 // For handling software debouncing of mechanical switch contacts
 #include &lt;Bounce2.h&gt;
@@ -180,10 +178,9 @@ void loop() {
 }
           </code>
         </pre>
-        </div>
-        <div class="code-title">Processing Code</div>
-        <div class="code-content">
-          <pre>
+    <br>
+    <h2>Processing Code</h2>
+    <pre>
           <code>
 import processing.serial.*;
 
@@ -217,15 +214,11 @@ void draw()
 }
         </code>
       </pre>
-        </div>
-      </div>
-    </section>
-    <section class="post">
-      <div class="post-title">07 | Final</div>
-      <div class="post-date">Posted 11.10.22</div>
-      <div class="text-container">
-        <div class="code-title">Arduino Code</div>
-        <pre>
+    <h3>7. Final Project</h3>
+    <p>Posted 11.10.22</p>
+    <br>
+    <h2>Arduino Code</h2>
+    <pre>
           <code>
 // Physical Computing Final Project by Tino Selic
 
@@ -584,10 +577,9 @@ void drawAlarm(void) {
 }
           </code>
         </pre>
-      </div>
-    </section>
-  </section>
-  <footer class="footer">Thanks Calvin.</footer>
+  </main>
+  <footer>Thanks Calvin.</footer>
+  <script src="./app.js"></script>
 </body>
 
 </html>

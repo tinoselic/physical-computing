@@ -11,52 +11,53 @@
 </head>
 
 <body>
-  <section class="header">
+  <header>
     <nav>
-      <ul>
-        <li><a href="index.html" class="type-content">Home</a></li>
-        <li><a href="docu.html" class="type-content">Docu</a></li>
-        <li><a href="code.html" class="type-content">Code</a></li>
-        <li><a href="about.html" class="type-content">About</a></li>
+      <div class="logo"><a href="index.html">
+          <h4>RD:AC</h4>
+        </a></div>
+      <div class="openMenu"><img src="assets/menu_FILL0_wght400_GRAD0_opsz48.svg" alt=""></div>
+      <ul class="mainMenu">
+        <li><a href="docu.html">Docu</a></li>
+        <li><a href="code.html">Code</a></li>
+        <li><a href="about.html">About</a></li>
+        <div class="closeMenu"><img src="assets/close_FILL0_wght400_GRAD0_opsz48.svg" alt=""></div>
       </ul>
     </nav>
-  </section>
-  <section class="content">
-    <div class="course-name">
-      <div>Physical Computing</div>
-      <div style="justify-self: end">Tino Selic</div>
-    </div>
-    <br />
-    <br />
-    <div class="video">
+  </header>
+  <main>
+    <p>Physical Computing</p>
+    <br>
+    <div class="responsive-video">
       <iframe width="640" height="360" src="https://www.youtube.com/embed/zojUPIs_D0o" title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
     </div>
-    <div class="content-name">How it works</div>
-    <div class="introduction">
-      Idle Mode
-      <br />
+    <br>
+    <br>
+    <h2>How it works</h2>
+    <br>
+    <h3>Idle Mode</h3>
+    <p>
       The RD:AC is in idle mode, when the handset is placed on the phone and the display shows date, time, alarm, and
       the last number dialled. By picking up the handset, the telephone will switch to the alarm mode. Return back to
       the idle mode by replacing the handset back on the telephone.
-      <br />
-      <br />
-      Alarm Mode
-      <br />
+      <br>
+      <br>
+    </p>
+    <h3>Alarm Mode</h3>
+    <p>
       In this mode you can set an alarm by dialling in the time you wish to let the phone ring. Enter the time in
       four-digit 24-hour notation (hh:mm), confirm and activate by placing the handset back on the telephone. When the
       set
       alarm time has come, the telephone starts ringing. Pick up the handset to make the ringing stop, replace the
       handset to deactivate the alarm and return to idle mode. Example: if you wish to wake up at 7 o'clock in the
       morning, dial in 0-7-0-0 and place the handset back on the telephone.
-      <br />
-      <br />
-
-    </div>
-  </section>
-  <footer class="footer">Thanks Calvin.</footer>
+    </p>
+  </main>
+  <footer>Thanks Calvin.</footer>
+  <script src="./app.js"></script>
 </body>
 
 </html>
