@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/x-icon" href="assets/dial_favicon.png" />
   <link rel="stylesheet" href="style.css" />
-  <title>Physical Computing Tino Selic</title>
+  <title>Physical Computing &ndash; Tino Selic</title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
     </nav>
   </header>
   <main>
-    <p>Physical Computing</p>
+    <p>Physical Computing &ndash; Tino Selic</p>
     <br>
     <h1>Code</h1>
     <br>
@@ -36,8 +36,9 @@
     <h3>1. Introduction</h3>
     <p>Posted 25.10.22</p>
     <br>
-    <h2>Arduino Code</h2>
-    <pre>
+    <h3>Arduino Code</h3>
+    <div class="code-content">
+      <pre>
           <code>
 // A button that first turns on one LED, then another, and then turns both LEDs off again
 int btnPin = 2;
@@ -109,11 +110,13 @@ void loop() {
 }
           </code>
         </pre>
+    </div>
     <h3>4. Communication</h3>
     <p>Posted 21.11.22</p>
     <br>
-    <h2>Arduino Code</h2>
-    <pre>
+    <h3>Arduino Code</h3>
+    <div class="code-content">
+      <pre>
           <code>
 // For handling software debouncing of mechanical switch contacts
 #include &lt;Bounce2.h&gt;
@@ -178,9 +181,11 @@ void loop() {
 }
           </code>
         </pre>
+    </div>
     <br>
-    <h2>Processing Code</h2>
-    <pre>
+    <h3>Processing Code</h3>
+    <div class="code-content">
+      <pre>
           <code>
 import processing.serial.*;
 
@@ -214,24 +219,26 @@ void draw()
 }
         </code>
       </pre>
+    </div>
     <h3>7. Final Project</h3>
     <p>Posted 11.10.22</p>
     <br>
-    <h2>Arduino Code</h2>
-    <pre>
+    <h3>Arduino Code</h3>
+    <div class="code-content">
+      <pre>
           <code>
 // Physical Computing Final Project by Tino Selic
 
 // For handling software debouncing of mechanical switch contacts
-#include <Bounce2.h>
+#include < Bounce2.h>
 
 // Libraries for RTC
-#include <Wire.h>
-#include <RTClib.h>
+#include < Wire.h>
+#include < RTClib.h>
 
 // Libraries for the OLED display
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include < Adafruit_GFX.h>
+#include < Adafruit_SSD1306.h>
 
 // Define an object of RTC_DS1307 class
 RTC_DS1307 RTC;
@@ -577,6 +584,7 @@ void drawAlarm(void) {
 }
           </code>
         </pre>
+    </div>
   </main>
   <footer>Thanks Calvin.</footer>
   <script src="./app.js"></script>
