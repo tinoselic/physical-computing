@@ -219,7 +219,7 @@ a:visited {
   }
 
   nav .logo {
-    padding-left: 100px;
+    padding-left: 150px;
   }
 
   nav .openMenu {
@@ -227,7 +227,7 @@ a:visited {
   }
 
   nav .mainMenu {
-    padding: 0px 100px 0px 0px;
+    padding: 0px 150px 0px 0px;
     height: fit-content;
     flex-wrap: wrap;
     display: inline-block;
@@ -247,7 +247,7 @@ a:visited {
   }
 
   main {
-    margin: 0 100px;
+    margin: 0 150px;
   }
 }
 
