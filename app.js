@@ -1,18 +1,19 @@
 const mainMenu = document.querySelector('.mainMenu');
 const closeMenu = document.querySelector('.closeMenu');
 const openMenu = document.querySelector('.openMenu');
+const main = document.querySelector('main');
 
 openMenu.addEventListener('click',showNav);
 closeMenu.addEventListener('click',closeNav);
 
 function showNav() {
     mainMenu.style.display = 'block';
-    mainMenu.style.top = '0';
     openMenu.style.display = 'none';
+    main.style.display = 'none';
 }
 
 function closeNav() {
     mainMenu.style.display = 'none';
-    mainMenu.style.top = '-100%';
     openMenu.style.display = 'block';
+    main.style.display = 'block';
 }
