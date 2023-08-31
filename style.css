@@ -45,12 +45,12 @@ nav .logo {
 nav .openMenu {
   display: block;
   position: absolute;
-  top: 15px;
+  top: 17px;
   right: 24px;
 }
 
 nav .openMenu img {
-  height: 30px;
+  height: 26px;
   cursor: pointer;
 }
 
@@ -78,13 +78,13 @@ nav .mainMenu li a {
 nav .mainMenu .closeMenu {
   display: block;
   position: absolute;
-  top: 15px;
+  top: 17px;
   right: 24px;
   cursor: pointer;
 }
 
 nav .mainMenu .closeMenu img {
-  height: 30px;
+  height: 26px;
 }
 
 main {
