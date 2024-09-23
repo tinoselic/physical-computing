@@ -38,7 +38,7 @@ nav {
 }
 
 nav .logo {
-  padding-left: 24px;
+  padding-left: 18px;
   width: fit-content;
 }
 
@@ -46,7 +46,7 @@ nav .openMenu {
   display: block;
   position: absolute;
   top: 15px;
-  right: 24px;
+  right: 18px;
 }
 
 nav .openMenu img {
@@ -66,7 +66,7 @@ nav .mainMenu {
 }
 
 nav .mainMenu li {
-  padding-left: 24px;
+  padding-left: 18px;
 }
 
 nav .mainMenu li a {
@@ -79,7 +79,7 @@ nav .mainMenu .closeMenu {
   display: block;
   position: absolute;
   top: 15px;
-  right: 24px;
+  right: 18px;
   cursor: pointer;
 }
 
@@ -88,7 +88,7 @@ nav .mainMenu .closeMenu img {
 }
 
 main {
-  margin: 0px 24px 0px;
+  margin: 0px 18px 0px;
   padding-top: 84px;
   display: block;
 }
@@ -148,7 +148,7 @@ code {
 }
 
 img {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -178,7 +178,7 @@ img {
 }
 
 footer {
-  margin: 24px 0px 24px 0px;
+  margin: 18px 0px 18px 0px;
   text-align: center;
   font-size: x-small;
 }
@@ -213,7 +213,7 @@ a:visited {
   color: #ffffff;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 796px) {
   nav {
     display: flex;
     justify-content: space-between;
@@ -235,7 +235,7 @@ a:visited {
   }
 
   nav .mainMenu li {
-    padding-left: 24px;
+    padding-left: 18px;
     display: inline-block;
   }
 
@@ -254,11 +254,11 @@ a:visited {
 
 @media only screen and (min-width: 1280px) {
   nav .logo {
-    padding-left: 300px;
+    padding-left: 250px;
   }
 
   nav .mainMenu {
-    padding-right: 300px;
+    padding-right: 250px;
   }
 
   nav .mainMenu li {
@@ -266,17 +266,45 @@ a:visited {
   }
 
   main {
-    margin: 0 300px;
+    margin: 0 250px;
   }
 }
 
 @media only screen and (min-width: 1920px) {
+  * {
+    font-size: large;
+  }
+
+  h1 {
+    font-size: xx-large;
+  }
+  
+  h2 {
+    font-size: x-large;
+  }
+  
+  h3 {
+    font-size: large;
+  }
+  
+  h4 {
+    font-size: large;
+  }
+  
+  p {
+    font-size: large;
+  }
+
+  footer {
+    font-size: small;
+  }
+
   nav .logo {
-    padding-left: 500px;
+    padding-left: 400px;
   }
 
   nav .mainMenu {
-    padding-right: 500px;
+    padding-right: 400px;
   }
 
   nav .mainMenu li {
@@ -284,6 +312,28 @@ a:visited {
   }
 
   main {
-    margin: 0 500px;
+    margin: 0 400px;
+  }
+}
+
+@media only screen and (min-width: 3840px) {
+  nav .logo {
+    padding-left: 1000px;
+  }
+
+  nav .mainMenu {
+    padding-right: 1000px;
+  }
+
+  nav .mainMenu li {
+    padding-left: 72px;
+  }
+
+  main {
+    margin: 0 1000px;
+  }
+
+  .headline {
+    width: calc(50% - 1000px);
   }
 }

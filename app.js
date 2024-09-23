@@ -17,3 +17,10 @@ function closeNav() {
     openMenu.style.display = 'block';
     main.style.display = 'block';
 }
+
+// Footer
+document.addEventListener("DOMContentLoaded", function() {
+    var footer = document.getElementById("copyright");
+    var footerText = "© 2024 Tino Selic";
+    footer.textContent = footerText;
+});
