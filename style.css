@@ -18,7 +18,7 @@
   margin: 0;
   list-style: none;
   box-sizing: border-box;
-  color: #999999;
+  color: #fff;
   font-family: "Jost Regular", sans-serif;
 }
 
@@ -70,8 +70,6 @@ nav .mainMenu li {
 }
 
 nav .mainMenu li a {
-  color: #ffffff;
-  text-underline-offset: 3px;
   line-height: 60px;
 }
 
@@ -134,6 +132,7 @@ p {
   max-width: 800px;
   font-size: medium;
   line-height: 1.5;
+  color: #999;
 }
 
 .code-content {
@@ -178,29 +177,31 @@ img {
 }
 
 footer {
-  margin: 18px 0px 18px 0px;
+  margin: 48px 0px 48px 0px;
   text-align: center;
   font-size: x-small;
 }
 
 nav a:link {
   text-decoration: none;
-  color: #ffffff;
+  color: #999;
 }
 
-nav .mainMenu a:hover {
-  text-decoration: underline;
-  color: #ffffff;
+nav a:hover {
+  color: #fff;
 }
 
-nav .mainMenu a:active {
-  text-decoration: underline;
-  color: #ffffff;
+nav a:visited {
+  color: #999;
+}
+
+nav a:visited:hover {
+  color: #fff;
 }
 
 a:link {
   text-decoration: underline;
-  color: #ffffff;
+  text-underline-offset: 2px;
 }
 
 a:hover {
@@ -209,8 +210,11 @@ a:hover {
 }
 
 a:visited {
-  text-decoration: underline;
-  color: #ffffff;
+  color: #fff;
+}
+
+a:visited:hover {
+  color: #999;
 }
 
 @media only screen and (min-width: 796px) {
@@ -220,7 +224,7 @@ a:visited {
   }
 
   nav .logo {
-    padding-left: 150px;
+    padding-left: 48px;
   }
 
   nav .openMenu {
@@ -228,14 +232,14 @@ a:visited {
   }
 
   nav .mainMenu {
-    padding: 0px 150px 0px 0px;
+    padding-right: 48px;
     height: fit-content;
     flex-wrap: wrap;
     display: inline-block;
   }
 
   nav .mainMenu li {
-    padding-left: 18px;
+    padding-left: 36px;
     display: inline-block;
   }
 
@@ -248,29 +252,47 @@ a:visited {
   }
 
   main {
-    margin: 0 150px;
+    margin: 0 48px;
   }
 }
 
 @media only screen and (min-width: 1280px) {
   nav .logo {
-    padding-left: 250px;
+    padding-left: 300px;
   }
 
   nav .mainMenu {
-    padding-right: 250px;
+    padding-right: 300px;
   }
 
   nav .mainMenu li {
-    padding-left: 36px;
+    padding-left: 48px;
   }
 
   main {
-    margin: 0 250px;
+    margin: 0 300px;
   }
 }
 
 @media only screen and (min-width: 1920px) {
+  nav .logo {
+    padding-left: 400px;
+  }
+
+  nav .mainMenu {
+    padding-right: 400px;
+  }
+
+  nav .mainMenu li {
+    padding-left: 48px;
+  }
+
+  main {
+    margin: 0 400px;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
   * {
     font-size: large;
   }
@@ -300,29 +322,25 @@ a:visited {
   }
 
   nav .logo {
-    padding-left: 400px;
+    padding-left: 600px;
   }
 
   nav .mainMenu {
-    padding-right: 400px;
-  }
-
-  nav .mainMenu li {
-    padding-left: 48px;
+    padding-right: 600px;
   }
 
   main {
-    margin: 0 400px;
+    margin: 0 600px;
   }
 }
 
 @media only screen and (min-width: 3840px) {
   nav .logo {
-    padding-left: 1000px;
+    padding-left: 800px;
   }
 
   nav .mainMenu {
-    padding-right: 1000px;
+    padding-right: 800px;
   }
 
   nav .mainMenu li {
@@ -330,10 +348,10 @@ a:visited {
   }
 
   main {
-    margin: 0 1000px;
+    margin: 0 800px;
   }
 
   .headline {
-    width: calc(50% - 1000px);
+    width: calc(50% - 800px);
   }
 }
