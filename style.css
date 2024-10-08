@@ -18,18 +18,17 @@
   margin: 0;
   list-style: none;
   box-sizing: border-box;
-  color: #fff;
+  color: #999;
   font-family: "Jost Regular", sans-serif;
 }
 
 body {
-  background: #000000;
+  background: #000;
 }
 
 nav {
   font-family: "Audiowide";
-  background: #000000;
-  /* box-shadow: 0px 1px; */
+  background: #000;
   position: fixed;
   width: 100%;
   height: fit-content;
@@ -91,37 +90,29 @@ main {
   display: block;
 }
 
-.introduction {
-  font-size: large;
-  margin-top: 25px;
-  line-height: 1.5;
-}
-
 h1 {
   font-family: "Audiowide";
-  color: hsl(0, 0%, 100%);
-  font-size: x-large;
+  color: #fff;
+  font-size: 24px;
   font-weight: normal;
-  text-transform: uppercase;
 }
 
 h2 {
-  font-family: "Audiowide";
-  color: #ffffff;
-  font-size: large;
+  font-family: "Jost";
+  color: #999;
+  font-size: 18px;
   font-weight: normal;
-  text-transform: uppercase;
+  font-style: italic;
 }
 
 h3 {
-  color: #ffffff;
-  font-size: medium;
-  font-weight: normal;
+  color: #fff;
+  font-size: 18px;
 }
 
 h4 {
   font-family: "Audiowide";
-  color: #ffffff;
+  color: #fff;
   font-weight: normal;
   text-transform: uppercase;
   line-height: 60px;
@@ -130,7 +121,7 @@ h4 {
 p {
   max-width: 100%;
   max-width: 800px;
-  font-size: medium;
+  font-size: 16px;
   line-height: 1.5;
   color: #999;
 }
@@ -147,13 +138,17 @@ code {
 }
 
 img {
-  margin-bottom: 18px;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
+.image-style {
+  margin: 36px 0 36px;
+}
+
 .responsive-video {
+  margin: 36px 0 36px;
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
@@ -179,7 +174,8 @@ img {
 footer {
   margin: 48px 0px 48px 0px;
   text-align: center;
-  font-size: x-small;
+  font-size: 12px;
+  color: #fff;
 }
 
 nav a:link {
@@ -200,6 +196,7 @@ nav a:visited:hover {
 }
 
 a:link {
+  color: #fff;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -272,6 +269,14 @@ a:visited:hover {
   main {
     margin: 0 300px;
   }
+
+  .image-style {
+    margin: 48px 0 48px;
+  }
+
+  .responsive-video {
+    margin: 48px 0 48px;
+  }
 }
 
 @media only screen and (min-width: 1920px) {
@@ -294,31 +299,31 @@ a:visited:hover {
 
 @media only screen and (min-width: 2560px) {
   * {
-    font-size: large;
+    font-size: 18px;
   }
 
   h1 {
-    font-size: xx-large;
+    font-size: 32px;
   }
   
   h2 {
-    font-size: x-large;
+    font-size: 24px;
   }
   
   h3 {
-    font-size: large;
+    font-size: 24px;
   }
   
   h4 {
-    font-size: large;
+    font-size: 18px;
   }
   
   p {
-    font-size: large;
+    font-size: 18px;
   }
 
   footer {
-    font-size: small;
+    font-size: 14px;
   }
 
   nav .logo {
