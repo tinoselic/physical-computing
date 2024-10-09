@@ -135,6 +135,8 @@ p {
 
 code {
   font-family: "FreeMono";
+  font-weight: bold;
+  color: #4e898e;
 }
 
 img {
