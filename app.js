@@ -21,6 +21,6 @@ function closeNav() {
 // Footer
 document.addEventListener("DOMContentLoaded", function() {
     var footer = document.getElementById("copyright");
-    var footerText = "© 2024 Tino Selic";
+    var footerText = "© 2025 Tino Selic";
     footer.textContent = footerText;
 });
